@@ -1,3 +1,3 @@
 <x-app-layout>
-    Jays Dashboard v2
+    Jays Dashboard
 </x-app-layout>

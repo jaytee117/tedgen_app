@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <form action="{{ route('register') }}" method="POST">
         @csrf
         <h2>Register for an Account</h2>
@@ -20,4 +20,4 @@
             </ul>
         @endif
     </form>
-</x-layout>
+</x-app-layout>

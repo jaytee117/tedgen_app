@@ -98,8 +98,9 @@
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             @if(isset($customer))
             <a href="{{ route('site.create', $customer->id) }}" class="btn float-end">Add a Site</a>
+             @include('components.sitelist',['sites' => $customer->site])
             @endif
-            @include('components.sitelist',['sites' => $customer->site])
+           
             
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>

@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Permission;
 class DashboardController extends Controller
 {
     public function index(){
-        Permission::create(['name' => 'edit customers']);
+        
         return view('dashboard');
     }
 }

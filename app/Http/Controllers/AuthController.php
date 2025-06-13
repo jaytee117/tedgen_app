@@ -24,7 +24,7 @@ class AuthController extends Controller {
         ]);
         $user = User::create($validated);
         Auth::login($user);
-        return redirect()->route('ninjas.index');
+        return redirect()->route('dashboard');
     }
 
     public function login(Request $request) {

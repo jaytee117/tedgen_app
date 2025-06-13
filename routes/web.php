@@ -10,7 +10,7 @@ use App\Http\Controllers\SiteController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

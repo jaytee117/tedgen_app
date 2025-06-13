@@ -14,8 +14,8 @@ class Site extends Model
     }
     public function getImageURL(){
         if($this->site_img){
-            return url($this->site_img);
+            return url('storage/'.$this->site_img);
         }
-        return "https://api.dicebear.com/6.x/funemoji/svg?seed={$this->site_name}"; 
+        return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->site_name}"; 
     }
 }

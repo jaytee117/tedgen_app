@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder {
             'email' => 'test@example.com',
         ]);
 
-        $this->call([
-            DojoSeeder::class,
-            NinjaSeeder::class,
-        ]);
+        //$this->call([
+        //    DojoSeeder::class,
+        //    NinjaSeeder::class,
+        //]);
     }
 }

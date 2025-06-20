@@ -34,8 +34,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
+        $user = Auth::user();
         return view('layouts.user.create', ['user' => $user]);
     }
 

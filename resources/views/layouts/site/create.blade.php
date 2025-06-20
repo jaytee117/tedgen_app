@@ -28,13 +28,14 @@
         @if (isset($site))
             <div class="col-md-3" id="imageUploader">
                 @if (isset($site->site_img))
-                    <img src="{{ $site->getImageURL() }}" alt="Uploaded File">
+                    <img src="{{ $site->getImageURL() }}" alt="Uploaded File" id="preview">
                 @else
-                    <img src="https://dummyimage.com/380/ffffff/000000">
+                    <img src="https://dummyimage.com/380/ffffff/000000" id="preview">
                 @endif
                 <label for="site_img">Upload an Image</label>
                 <input type="file" id="site_img" name="site_img"
-                    value="{{ old('site_img', isset($site->id) ? $site->site_img : '') }}" class="hidden">
+                    value="{{ old('site_img', isset($site->id) ? $site->site_img : '') }}" class="hidden" 
+                    onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0]);document.getElementById('preview').style.display = 'block';">
 
             </div>
         @endif

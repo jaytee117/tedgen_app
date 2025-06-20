@@ -3,13 +3,13 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                role="tab" aria-controls="home" aria-selected="true">Info</button>
-        </li>
-        <!--<li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Sites</button>
+                role="tab" aria-controls="home" aria-selected="true">Site Info</button>
         </li>
         <li class="nav-item" role="presentation">
+            <button class="nav-link" id="chp-tab" data-bs-toggle="tab" data-bs-target="#chp" type="button"
+                role="tab" aria-controls="chp" aria-selected="false">GenSet Installation</button>
+        </li>
+        <!--<li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                 role="tab" aria-controls="contact" aria-selected="false">Contact</button>
         </li>-->
@@ -108,6 +108,9 @@
     </form>
     <button type="button" onclick="window.location='{{ route('site.index') }}'"
         class="btn-red float-start">Cancel</button>
+</div>
+<div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
+    CHP
 </div>
 </div>
 </x-app-layout>

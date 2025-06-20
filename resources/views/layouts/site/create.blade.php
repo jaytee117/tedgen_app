@@ -111,6 +111,7 @@
 </div>
 @section('scripts')
     <script>
+        alert('1');
         const input = document.getElementById("site_img");
         const preview = document.getElementById("photo-preview");
         input.addEventListener('change',function(){

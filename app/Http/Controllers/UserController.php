@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('layouts.site.create');
+        return view('layouts.user.create');
     }
 
     /**

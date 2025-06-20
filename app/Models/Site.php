@@ -16,6 +16,6 @@ class Site extends Model
         if($this->site_img){
             return url('storage/'.$this->site_img);
         }
-        return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={$this->site_name}"; 
+        return "https://dummyimage.com/380/ffffff/000000"; 
     }
 }

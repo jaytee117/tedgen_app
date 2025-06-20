@@ -38,9 +38,9 @@ Route::post('/upload', [FileUploadController::class, 'upload'])->name('upload')-
 Route::get('/showupload',[FileUploadController::class,'showupload'])->name('showupload')->middleware('auth');
 
 //user routes
-Route::middleware('auth')->controller(UserController::class)->group(function () {
-    Route::get('/user/{user}', 'show')->name('user.show');
-});
+
+Route::get('/user', 'UserController@show')->name('user.show')->middleware('auth');
+
 
 //customer routes
 Route::middleware('auth')->controller(CustomerController::class)->group(function () {

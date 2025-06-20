@@ -39,7 +39,7 @@ Route::get('/showupload',[FileUploadController::class,'showupload'])->name('show
 
 //user routes
 Route::middleware('auth')->controller(UserController::class)->group(function () {
-    Route::get('/user', 'show')->name('user.show');
+    Route::get('/user/{user}', 'show')->name('user.show');
 });
 
 //customer routes

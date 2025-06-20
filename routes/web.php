@@ -5,6 +5,7 @@ use App\Http\Controllers\NinjaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SiteController;
 
@@ -35,6 +36,11 @@ Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard'
 //file upload
 Route::post('/upload', [FileUploadController::class, 'upload'])->name('upload')->middleware('auth');
 Route::get('/showupload',[FileUploadController::class,'showupload'])->name('showupload')->middleware('auth');
+
+//user routes
+Route::middleware('auth')->controller(UserController::class)->group(function () {
+    Route::get('/user/{user}', 'show')->name('user.show');
+});
 
 //customer routes
 Route::middleware('auth')->controller(CustomerController::class)->group(function () {

@@ -112,7 +112,7 @@
 @section('scripts')
     <script>
         const input = document.getElementById("site_img");
-        const preview = document.getElementById("photo_preview");
+        const preview = document.getElementById("photo-preview");
         input.addEventListener('change',function(){
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

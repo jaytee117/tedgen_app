@@ -28,7 +28,7 @@
         @if (isset($site))
             <div class="col-md-3" id="imageUploader">
                 @if (isset($site->site_img))
-                    <img src="{{ $site->getImageURL() }}" alt="Uploaded File">
+                    <img src="{{ $site->getImageURL() }}" alt="Uploaded File" id="photo-preview">
                 @else
                     <img src="https://dummyimage.com/380/ffffff/000000">
                 @endif
@@ -109,4 +109,20 @@
         class="btn-red float-start">Cancel</button>
 </div>
 </div>
+@section('scripts')
+    <script>
+        const input = document.getElementById("site_img");
+        const preview = document.getElementById("photo_preview");
+        input.addEventListener('change',function(){
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.classList.remove('d-none');
+                    preview.setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
+@endsection
 </x-app-layout>

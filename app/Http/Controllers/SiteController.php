@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\InstallationController;
 
 class SiteController extends Controller
 {
@@ -44,9 +45,7 @@ class SiteController extends Controller
     }
 
     public function show(Site $site){
-        //route -> /ninjas/{$id}
-        //$customer->load('site'); //to load in any relations
-
+        $site->load('installation'); //to load in any relations
         //show/edit uses the same form for create
         return view('layouts.site.create', ["site" => $site]);
     }

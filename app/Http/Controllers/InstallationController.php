@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\SiteController;
-use App\Models\Installtion;
+use App\Models\Site;
 
 class InstallationController extends Controller
 {
@@ -19,9 +18,9 @@ class InstallationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Site $site)
     {
-        return view('layouts.installation.create');
+        return view('layouts.installation.create', ['site' => $site]);
     }
 
     /**
@@ -35,10 +34,9 @@ class InstallationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Site $site)
+    public function show()
     {
-        $installation = Installtion::where('site_id', $site->id)->first();
-        return view('layouts.installation.create', ['installation' => $installation]);
+//
     }
 
     /**

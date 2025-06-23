@@ -15,7 +15,7 @@
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            @if (isset($customer->id))                
+            @if (isset($customer->id))
                 <form action="{{ route('customer.update', $customer->id) }}" method="POST">
                 @else
                     <form action="{{ route('customer.store') }}" method="POST">
@@ -96,12 +96,12 @@
                 class="btn-red float-start">Cancel</button>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            @if(isset($customer))
-            <a href="{{ route('site.create', $customer->id) }}" class="btn float-end">Add a Site</a>
-             @include('components.sitelist',['sites' => $customer->site])
+            @if (isset($customer))
+                <a href="{{ route('site.create', $customer->id) }}" class="btn float-end">Add a Site</a>
+                @include('components.sitelist', ['sites' => $customer->site])
             @endif
-           
-            
+
+
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
     </div>

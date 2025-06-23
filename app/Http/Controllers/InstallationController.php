@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\SiteController;
+use App\Models\Installtion;
 
 class InstallationController extends Controller
 {
@@ -33,10 +35,10 @@ class InstallationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Site $site)
     {
-        //$user = Auth::user();
-        //return view('layouts.user.create', ['user' => $user]);
+        $installation = Installtion::where('site_id', $site->id)->first();
+        return view('layouts.installation.create', ['installation' => $installation]);
     }
 
     /**

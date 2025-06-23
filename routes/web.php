@@ -64,7 +64,7 @@ Route::middleware('auth')->controller(SiteController::class)->group(function () 
 //installation routes
 Route::middleware('auth')->controller(InstallationController::class)->group(function () {
     Route::get('/installation/create/{site}', 'create')->middleware(['role:employee|admin'])->name('installation.create');
-    Route::get('/installation', 'show')->name('installation.show');
+    Route::get('/installation/{site}/', 'show')->name('installation.show');
 });
 
 

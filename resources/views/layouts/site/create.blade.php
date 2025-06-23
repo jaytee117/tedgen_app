@@ -111,7 +111,7 @@
                     class="btn-red float-start">Cancel</button>
         </div>
         <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
-            CHP
+            @include('components.chpform')
         </div>
     </div>
 </x-app-layout>

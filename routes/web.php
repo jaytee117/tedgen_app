@@ -8,6 +8,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\InstallationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,6 +59,12 @@ Route::middleware('auth')->controller(SiteController::class)->group(function () 
     Route::get('/site/{site}', 'show')->name('site.show');
     Route::post('/site', 'store')->middleware(['role:employee|admin'])->name('site.store');
     Route::post('/site/update/{id}', 'update')->middleware(['role:employee|admin'])->name('site.update');
+});
+
+//installation routes
+Route::middleware('auth')->controller(InstallationController::class)->group(function () {
+    Route::get('/installation/create/{site}', 'create')->middleware(['role:employee|admin'])->name('installation.create');
+    Route::get('/installation', 'show')->name('installation.show');
 });
 
 

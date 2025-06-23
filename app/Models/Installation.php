@@ -36,7 +36,7 @@ class Installation extends Model
     ];
 
     public function site(){
-        return $this->hasOne(Site::class, 'site_id', 'id');
+        return $this->belongsTo(Site::class, 'site_id', 'id');
     }
 
 }

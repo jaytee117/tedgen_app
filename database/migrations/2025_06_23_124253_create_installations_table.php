@@ -29,15 +29,15 @@ return new class extends Migration
             $table->decimal('tedgen_gas_heating', 10, 6);
             $table->decimal('calorific_value', 10, 6);
             $table->decimal('conversion_factor', 10, 6);
-            $table->decimal('elec_carbon_rate', 10, 6);
-            $table->decimal('gas_carbon_rate', 10, 6);
-            $table->string('xero_id');
+            $table->decimal('elec_carbon_rate', 10, 6)->nullable();
+            $table->decimal('gas_carbon_rate', 10, 6)->nullable();
+            $table->string('xero_id')->nullable();
             $table->integer('machine_type');
             $table->integer('machine_status');
-            $table->string('machine_model');
+            $table->string('machine_model')->nullable();
             $table->integer('team_id');
-            $table->integer('logger_type');
-            $table->string('ip_address');
+            $table->integer('logger_type')->nullable();
+            $table->string('ip_address')->nullable();
             $table->timestamps();
         });
     }

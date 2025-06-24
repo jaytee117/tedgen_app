@@ -2,6 +2,7 @@
     <thead class="bg-sky-700 text-white">
         <tr>
             <th>Asset ID</th>
+            <th>Site Name</th>
             <th>Machine Type</th>
             <th>Machine Status</th>
             <th>Logger Type</th>
@@ -13,6 +14,7 @@
         @foreach ($installations as $install)
             <tr>
                 <td>{{ $install->asset_id }}</td>
+                <td>{{ isset($site->id) ? $site->site_name : $install->site->site_name }}</td>
                 <td>{{ App\Models\Installation::$_machine_type[$install->machine_type] }}</td>
                 <td>{{ App\Models\Installation::$_machine_status[$install->machine_status] }}</td>
                 <td>{{ App\Models\Installation::$_logger_type[$install->logger_type] }}</td>

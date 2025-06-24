@@ -62,7 +62,7 @@ class InstallationController extends Controller
         $valid = $this->validateFields($request);
         $validated = InstallationAction::storeNewRates($valid);
         Installation::where('id', $id)->update($validated);
-        return redirect()->route('installation.index')->with('success', 'Installation Edited!');
+        return redirect()->route('installation.show', $id)->with('success', 'Installation Edited!');
     }
 
     /**

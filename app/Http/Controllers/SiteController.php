@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\Customer;
+use App\Services\GeoCoder;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\InstallationController;
 
 class SiteController extends Controller
 {
@@ -28,14 +28,19 @@ class SiteController extends Controller
             $imagePath = $request->file('site_img')->store('upload', 'public');
             $validated['site_img'] = $imagePath;
         }
+        if (!isset($validated['lat'])):
+            $geocode = new GeoCoder($validated['postcode']);
+            if ($geocode->getStatus() == 200):
+                $validated = $geocode->storeResults($validated);
+            endif;
+        endif;
         Site::where('id', $id)->update($validated);
         return redirect()->route('site.index')->with('success', 'Site Edited!');
     }
 
     public function show(Site $site)
     {
-        $site->load('installation'); //to load in any relations
-        //show/edit uses the same form for create
+        $site->load('installation'); //to load in any relations    
         return view('layouts.site.create', ["site" => $site]);
     }
 
@@ -46,6 +51,10 @@ class SiteController extends Controller
             $imagePath = $request->file('site_img')->store('upload', 'public');
             $validated['site_img'] = $imagePath;
         }
+        $geocode = new GeoCoder($validated['postcode']);
+        if ($geocode->getStatus() == 200):
+            $validated = $geocode->storeResults($validated);
+        endif;
         Site::create($validated);
         return redirect()->route('site.index')->with('success', 'Site Created!');
     }

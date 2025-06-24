@@ -40,4 +40,24 @@ class Installation extends Model
         return $this->belongsTo(Site::class, 'site_id', 'id');
     }
 
+    public static $_machine_type = [
+        0 => 'CHP',
+        1 => 'GENSET',
+    ];
+
+    public static $_machine_status = [
+        0 => 'Inactive',
+        1 => 'Active',
+    ];
+
+    public static $_logger_type = [
+        0 => 'None',
+        1 => 'X420',
+        2 => 'Crucible Meter Logger 100',
+        3 => 'FTP',
+        4 => '2G API'
+    ];
+
+
+
 }

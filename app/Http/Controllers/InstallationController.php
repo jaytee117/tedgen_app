@@ -13,7 +13,8 @@ class InstallationController extends Controller
      */
     public function index()
     {
-        //
+       $installations = Installation::with('site')->orderBy('created_at', 'desc')->paginate(10);
+        return view('layouts.installtion.index',['installations' => $installations]);
     }
 
     /**

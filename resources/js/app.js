@@ -32,3 +32,19 @@ function initSiteTable() {
 }
 window.initSiteTable = initSiteTable;
 
+function initInstallationTable() {
+    let table = new DataTable('#installationTable', {
+        "ordering": false,
+        "sDom": '<"top"f<"controls"><"clear">>rt<"bottom"ilp><"clear">',
+
+        fnInitComplete: function () {
+            $('.dt-search input').attr("placeholder", "Search");
+
+        },
+        oLanguage: {
+            "sSearch": "_INPUT_" //search
+        }
+    });
+}
+window.initInstallationTable = initInstallationTable;
+

@@ -16,26 +16,27 @@
                     </label>
                     <label for="machine_status" class="col-md-3">Machine Status:
                         <select id="machine_status" name="machine_status" required>
+                            
                             <option value="" disabled selected>Select a status</option>
-                            <option value="0">Inactive</option>
-                            <option value="1">Active</option>
+                            @foreach(App\Models\Installation::$_machine_status as $key=>$value)
+                            <option value={{$key}}>{{$value}}</option>
+                            @endforeach
                         </select>
                     </label>
                     <label for="machine_type" class="col-md-3">Machine Type:
                         <select id="machine_type" name="machine_type" required>
                             <option value="" disabled selected>Select a type</option>
-                            <option value="0">CHP</option>
-                            <option value="1">GENSET</option>
+                            @foreach(App\Models\Installation::$_machine_type as $key=>$value)
+                            <option value={{$key}}>{{$value}}</option>
+                            @endforeach
                         </select>
                     </label>
                     <label for="logger_type" class="col-md-3">Logger Type:
                         <select id="logger_type" name="logger_type" required>
                             <option value="" disabled selected>Select a type</option>
-                            <option value="0">None</option>
-                            <option value="1">X420</option>
-                            <option value="2">Crucible Meter Logger 100</option>
-                            <option value="3">FTP</option>
-                            <option value="4">2G-API</option>
+                            @foreach(App\Models\Installation::$_logger_type as $key=>$value)
+                            <option value={{$key}}>{{$value}}</option>
+                            @endforeach
                         </select>
                     </label>
                     <label for="ip_address" class="col-md-3">IP Address:

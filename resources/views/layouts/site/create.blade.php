@@ -7,7 +7,7 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="chp-tab" data-bs-toggle="tab" data-bs-target="#chp" type="button"
-                role="tab" aria-controls="chp" aria-selected="false">GenSet Installation</button>
+                role="tab" aria-controls="chp" aria-selected="false">GenSet Installations</button>
         </li>
         <!--<li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"

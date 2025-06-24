@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Installation;
 use Illuminate\Http\Request;
 use App\Models\Site;
+use App\Actions\InstallationAction;
 
 class InstallationController extends Controller
 {
@@ -30,7 +31,8 @@ class InstallationController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $this->validateFields($request);
+        $valid = $this->validateFields($request);
+        $validated = InstallationAction::storeNewRates($valid);
         Installation::create($validated);
         return redirect()->route('site.index')->with('success', 'Installation Created!');
     }
@@ -57,7 +59,8 @@ class InstallationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validated = $this->validateFields($request);
+        $valid = $this->validateFields($request);
+        $validated = InstallationAction::storeNewRates($valid);
         Installation::where('id', $id)->update($validated);
         return redirect()->route('installation.index')->with('success', 'Installation Edited!');
     }

@@ -25,9 +25,7 @@
 
                         <option value="" disabled selected>Select a status</option>
                         @foreach (App\Models\Installation::$_machine_status as $key => $value)
-                            <option value="{{ $key }}"
-                                {{ $key == old('machine_status', $installation->machine_status) ? 'selected' : '' }}>
-                                {{ $value }}</option>
+                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->machine_status) selected @endif>{{ $value }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -35,9 +33,7 @@
                     <select id="machine_type" name="machine_type" required>
                         <option value="" disabled selected>Select a type</option>
                         @foreach (App\Models\Installation::$_machine_type as $key => $value)
-                            <option value="{{ $key }}"
-                                {{ $key == old('machine_type', $installation->machine_type) ? 'selected' : '' }}>
-                                {{ $value }}</option>
+                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->machine_type) selected @endif>{{ $value }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -45,9 +41,7 @@
                     <select id="logger_type" name="logger_type" required>
                         <option value="" disabled selected>Select a type</option>
                         @foreach (App\Models\Installation::$_logger_type as $key => $value)
-                            <option value="{{ $key }}"
-                                {{ $key == old('logger_type', $installation->logger_type) ? 'selected' : '' }}>
-                                {{ $value }}</option>
+                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->logger_type) selected @endif>{{ $value }}</option>
                         @endforeach
                     </select>
                 </label>

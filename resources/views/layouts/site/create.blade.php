@@ -110,12 +110,7 @@
                 class="btn-red float-start">Cancel</button>
         </div>
         <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
-            @if ($site->installation)
-                
-            @else
-                <a href="{{ route('installation.create', $site->id) }}" class="btn float-end">Add an Installation</a>
-            @endif
-            
+            <a href="{{ route('installation.create', $site->id) }}" class="btn float-end">Add an Installation</a>
         </div>
     </div>
 </x-app-layout>

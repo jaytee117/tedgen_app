@@ -10,6 +10,7 @@ class Installation extends Model
     protected $fillable = [
         'account_id', 
         'site_id', 
+        'asset_id',
         'elec_day_rate', 
         'elec_night_rate', 
         'elec_ccl_rate',

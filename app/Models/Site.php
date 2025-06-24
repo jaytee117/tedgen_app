@@ -15,12 +15,12 @@ class Site extends Model
     {
         return $this->belongsTo(Customer::class, 'account_id', 'id');
     }
+
     public function installation()
     {
-        return $this->hasOne(Installation::class, 'site_id', 'id');
+        return $this->hasMany(Installation::class, 'site_id', 'id');
     }
-
-
+    
     public function getImageURL()
     {
         if ($this->site_img) {

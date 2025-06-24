@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('account_id');
             $table->integer('site_id');
+            $table->string('asset_id');
             $table->decimal('elec_day_rate', 10, 6);
             $table->decimal('elec_night_rate', 10, 6);
             $table->decimal('elec_ccl_rate', 10, 6);

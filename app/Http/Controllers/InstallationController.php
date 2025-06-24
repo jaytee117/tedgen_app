@@ -14,7 +14,7 @@ class InstallationController extends Controller
     public function index()
     {
        $installations = Installation::with('site')->orderBy('created_at', 'desc')->paginate(10);
-        return view('layouts.installtion.index',['installations' => $installations]);
+        return view('layouts.installation.index',['installations' => $installations]);
     }
 
     /**
@@ -57,15 +57,16 @@ class InstallationController extends Controller
             'tedgen_gas_heating' => 'nullable|string|max:255',
         ]);
         Installation::create($validated);
-        return redirect()->route('site.index')->with('success', 'Intallation Created!');
+        return redirect()->route('site.index')->with('success', 'Installation Created!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Installation $installation)
+
     {
-        //
+           return view('layouts.installation.create', ["installation" => $installation]);
     }
 
     /**
@@ -81,7 +82,34 @@ class InstallationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $validated = $request->validate([
+            'account_id' => 'required|integer',
+            'site_id' => 'required|integer',
+            'asset_id' => 'required|string|max:255',
+            'machine_status' => 'required|integer',
+            'machine_type' => 'required|integer',
+            'logger_type' => 'required|integer',
+            'ip_address' => 'nullable|string|max:255',
+            'xero_id' => 'nullable|string|max:255',
+            'elec_day_rate' => 'nullable|string|max:255',
+            'elec_night_rate' => 'nullable|string|max:255',
+            'gas_rate' => 'nullable|string|max:255',
+            'elec_ccl_rate' => 'nullable|string|max:255',
+            'gas_ccl_rate' => 'nullable|string|max:255',
+            'elec_ccl_discount' => 'nullable|string|max:255',
+            'gas_ccl_discount' => 'nullable|string|max:255',
+            'boiler_efficiency' => 'nullable|string|max:255',
+            'tedgen_discount' => 'nullable|string|max:255',
+            'calorific_value' => 'nullable|string|max:255',
+            'conversion_factor' => 'nullable|string|max:255',
+            'elec_carbon_rate' => 'nullable|string|max:255',
+            'gas_carbon_rate' => 'nullable|string|max:255',
+            'tedgen_elec_day' => 'nullable|string|max:255',
+            'tedgen_elec_night' => 'nullable|string|max:255',
+            'tedgen_gas_heating' => 'nullable|string|max:255',
+        ]);
+        Installation::where('id',$id)->update($validated);      
+        return redirect()->route('installation.index')->with('success', 'Installation Edited!');
     }
 
     /**

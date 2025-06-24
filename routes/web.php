@@ -66,7 +66,8 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::get('/installation', 'index')->name('installation.index');
     Route::post('/installation', 'store')->middleware(['role:employee|admin'])->name('installation.store');
     Route::get('/installation/create/{site}', 'create')->middleware(['role:employee|admin'])->name('installation.create');
-    Route::get('/installation/{site}/', 'show')->name('installation.show');
+    Route::get('/installation/{installation}/', 'show')->name('installation.show');
+    Route::post('/installation/update/{id}', 'update')->middleware(['role:employee|admin'])->name('installation.update');
 });
 
 

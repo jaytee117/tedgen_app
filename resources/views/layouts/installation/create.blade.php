@@ -1,5 +1,140 @@
 <x-app-layout>
-   CHP CREATE FORM - HAVE BEEN SENT $site
-   <form action="{{ route('installation.store') }}" method="POST">
-   </form>
+    <div class="tab-content">
+        <div class="tab-pane fade show active">
+            <form action="{{ route('installation.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <h3 class="mt-4">Installation Data</h3>
+                    <input type="hidden" id="account_id" name="account_id"
+                        value="{{ old('account_id', $site->account_id) }}" required>
+                    <input type="hidden" id="site_id" name="site_id" value="{{ old('site_id', $site->id) }}"
+                        required>
+                    <label for="asset_id" class="col-md-3">Asset Identifier:
+                        <input type="text" id="asset_id" name="asset_id"
+                            value="{{ old('asset_id', isset($installation->id) ? $installation->asset_id : '') }}"
+                            required>
+                    </label>
+                    <label for="machine_status" class="col-md-3">Machine Status:
+                        <select id="machine_status" name="machine_status" required>
+                            <option value="" disabled selected>Select a status</option>
+                            <option value="0">Inactive</option>
+                            <option value="1">Active</option>
+                        </select>
+                    </label>
+                    <label for="machine_type" class="col-md-3">Machine Type:
+                        <select id="machine_type" name="machine_type" required>
+                            <option value="" disabled selected>Select a type</option>
+                            <option value="0">CHP</option>
+                            <option value="1">GENSET</option>
+                        </select>
+                    </label>
+                    <label for="logger_type" class="col-md-3">Logger Type:
+                        <select id="logger_type" name="logger_type" required>
+                            <option value="" disabled selected>Select a type</option>
+                            <option value="0">None</option>
+                            <option value="1">X420</option>
+                            <option value="2">Crucible Meter Logger 100</option>
+                            <option value="3">FTP</option>
+                            <option value="4">2G-API</option>
+                        </select>
+                    </label>
+                    <label for="ip_address" class="col-md-3">IP Address:
+                        <input type="text" id="ip_address" name="ip_address"
+                            value="{{ old('ip_address', isset($installation->id) ? $installation->ip_address : '') }}">
+                    </label>
+                    <label for="xero_id" class="col-md-3">Xero Contact ID:
+                        <input type="text" id="xero_id" name="xero_id"
+                            value="{{ old('xero_id', isset($installation->id) ? $installation->xero_id : '') }}">
+                    </label>
+                </div>
+                <div class="row">
+                    <h3 class="mt-4">Supplier Rates</h3>
+                    <label for="elec_day_rate" class="col-md-3">Electric Day Rate:
+                        <input type="text" id="elec_day_rate" name="elec_day_rate"
+                            value="{{ old('elec_day_rate', isset($installation->id) ? $installation->elec_day_rate : '') }}">
+                    </label>
+                    <label for="elec_ccl_rate" class="col-md-3">Electric CCL:
+                        <input type="text" id="elec_ccl_rate" name="elec_ccl_rate"
+                            value="{{ old('elec_ccl_rate', isset($installation->id) ? $installation->elec_ccl_rate : '') }}">
+                    </label>
+                    <label for="elec_ccl_discount" class="col-md-3">Electric CCL Discount(%):
+                        <input type="text" id="elec_ccl_discount" name="elec_ccl_discount"
+                            value="{{ old('elec_ccl_discount', isset($installation->id) ? $installation->elec_ccl_discount : '') }}">
+                    </label>
+                    <label for="boiler_efficiency" class="col-md-3">Boiler Efficiency(%):
+                        <input type="text" id="boiler_efficiency" name="boiler_efficiency"
+                            value="{{ old('boiler_efficiency', isset($installation->id) ? $installation->boiler_efficiency : '') }}">
+                    </label>
+                    <label for="elec_night_rate" class="col-md-3">Electric Night Rate:
+                        <input type="text" id="elec_night_rate" name="elec_night_rate"
+                            value="{{ old('elec_night_rate', isset($installation->id) ? $installation->elec_night_rate : '') }}">
+                    </label>
+                    <label for="gas_ccl_rate" class="col-md-3">Gas CCL:
+                        <input type="text" id="gas_ccl_rate" name="gas_ccl_rate"
+                            value="{{ old('gas_ccl_rate', isset($installation->id) ? $installation->gas_ccl_rate : '') }}">
+                    </label>
+                    <label for="gas_ccl_discount" class="col-md-3">Gas CCL Discount(%):
+                        <input type="text" id="gas_ccl_discount" name="gas_ccl_discount"
+                            value="{{ old('gas_ccl_discount', isset($installation->id) ? $installation->gas_ccl_discount : '') }}">
+                    </label>
+                    <label for="tedgen_discount" class="col-md-3">TedGen Discount(%):
+                        <input type="text" id="tedgen_discount" name="tedgen_discount"
+                            value="{{ old('tedgen_discount', isset($installation->id) ? $installation->tedgen_discount : '') }}">
+                    </label>
+                    <label for="gas_rate" class="col-md-3">Gas Rate:
+                        <input type="text" id="gas_rate" name="gas_rate"
+                            value="{{ old('gas_rate', isset($installation->id) ? $installation->gas_rate : '') }}">
+                    </label>
+                    <hr>
+                    <h3>Conversion / Carbon Factors</h3>
+                    <label for="calorific_value" class="col-md-3">Calorific Value:
+                        <input type="text" id="calorific_value" name="calorific_value"
+                            value="{{ old('calorific_value', isset($installation->id) ? $installation->calorific_value : '') }}">
+                    </label>
+                    <label for="conversion_factor" class="col-md-3">Conversion Factor:
+                        <input type="text" id="conversion_factor" name="conversion_factor"
+                            value="{{ old('conversion_factor', isset($installation->id) ? $installation->conversion_factor : '') }}">
+                    </label>
+                    <label for="elec_carbon_rate" class="col-md-3">Electricity Carbon Rate (Tonnes/kW):
+                        <input type="text" id="elec_carbon_rate" name="elec_carbon_rate"
+                            value="{{ old('elec_carbon_rate', isset($installation->id) ? $installation->elec_carbon_rate : '') }}">
+                    </label>
+                    <label for="gas_carbon_rate" class="col-md-3">Gas Carbon Rate (Tonnes/kW):
+                        <input type="text" id="gas_carbon_rate" name="gas_carbon_rate"
+                            value="{{ old('gas_carbon_rate', isset($installation->id) ? $installation->gas_carbon_rate : '') }}">
+                    </label>
+                </div>
+                <div class="row">
+                    <h3 class="mt-4">Calculated Rates</h3>
+                    <label for="tedgen_elec_day" class="col-md-4">Calculated Electric Day Rate:
+                        <input type="text" id="tedgen_elec_day" name="tedgen_elec_day"
+                            value="{{ old('tedgen_elec_day', isset($installation->id) ? $installation->tedgen_elec_day : '') }}"
+                            readonly>
+                    </label>
+                    <label for="tedgen_elec_night" class="col-md-4">Calculated Electric Night Rate:
+                        <input type="text" id="tedgen_elec_night" name="tedgen_elec_night"
+                            value="{{ old('tedgen_elec_night', isset($installation->id) ? $installation->tedgen_elec_night : '') }}"
+                            readonly>
+                    </label>
+                    <label for="tedgen_gas_heating" class="col-md-4">Calculated Gas Heating Rate:
+                        <input type="text" id="tedgen_gas_heating" name="tedgen_gas_heating"
+                            value="{{ old('tedgen_gas_heating', isset($installation->id) ? $installation->tedgen_gas_heating : '') }}"
+                            readonly>
+                    </label>
+                </div>
+                <button type="submit"
+                    class="btn mt-4 float-end">{{ isset($installation->id) ? 'Update Installation' : 'Create Installation' }}</button>
+                <!--validation-->
+                @if ($errors->any())
+                    <ul class="px-4 py-2 bg-red-100">
+                        @foreach ($errors->all() as $error)
+                            <li class="my-2 text-red-500">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </form>
+            <button type="button" onclick="window.location='{{ route('site.index') }}'"
+                class="btn-red float-start">Cancel</button>
+        </div>
+        <div>
 </x-app-layout>

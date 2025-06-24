@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Installation;
 use Illuminate\Http\Request;
 use App\Models\Site;
 
@@ -28,7 +29,34 @@ class InstallationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'account_id' => 'required|integer',
+            'site_id' => 'required|integer',
+            'asset_id' => 'required|string|max:255',
+            'machine_status' => 'required|integer',
+            'machine_type' => 'required|integer',
+            'logger_type' => 'required|integer',
+            'ip_address' => 'nullable|string|max:255',
+            'xero_id' => 'nullable|string|max:255',
+            'elec_day_rate' => 'nullable|string|max:255',
+            'elec_night_rate' => 'nullable|string|max:255',
+            'gas_rate' => 'nullable|string|max:255',
+            'elec_ccl_rate' => 'nullable|string|max:255',
+            'gas_ccl_rate' => 'nullable|string|max:255',
+            'elec_ccl_discount' => 'nullable|string|max:255',
+            'gas_ccl_discount' => 'nullable|string|max:255',
+            'boiler_efficiency' => 'nullable|string|max:255',
+            'tedgen_discount' => 'nullable|string|max:255',
+            'calorific_value' => 'nullable|string|max:255',
+            'conversion_factor' => 'nullable|string|max:255',
+            'elec_carbon_rate' => 'nullable|string|max:255',
+            'gas_carbon_rate' => 'nullable|string|max:255',
+            'tedgen_elec_day' => 'nullable|string|max:255',
+            'tedgen_elec_night' => 'nullable|string|max:255',
+            'tedgen_gas_heating' => 'nullable|string|max:255',
+        ]);
+        Installation::create($validated);
+        return redirect()->route('site.index')->with('success', 'Intallation Created!');
     }
 
     /**
@@ -36,7 +64,7 @@ class InstallationController extends Controller
      */
     public function show()
     {
-//
+        //
     }
 
     /**

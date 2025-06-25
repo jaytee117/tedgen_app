@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="tab-content">
         <div class="tab-pane fade show active">
-            @if ($installation->id)
+            @if (isset($installation))
                 <form action="{{ route('installation.destroy', $installation->id) }}" method="POST">
                     @csrf
                     @method('DELETE')

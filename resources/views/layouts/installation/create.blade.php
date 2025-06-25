@@ -2,6 +2,7 @@
     <div class="tab-content">
         <div class="tab-pane fade show active">
             @if (isset($installation))
+           ***DEV {{ count($installation->datalines) }} datalines ***<br>
             <div class="row">
                 <form action="{{ route('installation.destroy', $installation->id) }}" method="POST" class="mb-0 pb-0">
                     @csrf

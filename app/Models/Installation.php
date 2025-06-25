@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Site;
+use App\Models\DataLine;
 
 class Installation extends Model
 {
@@ -38,6 +39,11 @@ class Installation extends Model
 
     public function site(){
         return $this->belongsTo(Site::class, 'site_id', 'id');
+    }
+    
+    public function datalines()
+    {
+        return $this->hasMany(DataLine::class, 'installation_id', 'id');
     }
 
     public static $_machine_type = [

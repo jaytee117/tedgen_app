@@ -34,7 +34,7 @@ class InstallationController extends Controller
         $valid = $this->validateFields($request);
         $validated = InstallationAction::storeNewRates($valid);
         $installation = Installation::create($validated);
-        $datalines = InstallationAction::createDataLines($installation);
+        InstallationAction::createDataLines($installation);
         return redirect()->route('installation.show', ['installation' => $installation])->with('success', 'Installation Created!');
     }
 
@@ -44,6 +44,7 @@ class InstallationController extends Controller
     public function show(Installation $installation)
 
     {
+        $installation->load('datalines'); //to load in any relations    
         return view('layouts.installation.create', ["installation" => $installation]);
     }
 

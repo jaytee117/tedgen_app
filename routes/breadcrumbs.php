@@ -22,6 +22,10 @@ Breadcrumbs::for('installation.index', function (BreadcrumbTrail $trail): void {
     $trail->push('Installations', route('installation.index'));
 });
 
+Breadcrumbs::for('customer.create', function (BreadcrumbTrail $trail): void {
+    $trail->push('Create Customer', route('customer.create'));
+});
+
 Breadcrumbs::for('customer.show', function (BreadcrumbTrail $trail, Customer $customer): void {
     $trail->parent('customer.index');
     $trail->push($customer->customer_name, route('customer.show', $customer));

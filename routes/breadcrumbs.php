@@ -31,7 +31,7 @@ Breadcrumbs::for('customer.create', function (BreadcrumbTrail $trail): void {
 });
 
 Breadcrumbs::for('customer.show', function (BreadcrumbTrail $trail, Customer $customer): void {
-    $trail->parent('customer.index');
+    $trail->parent('dashboard');
     $trail->push($customer->customer_name, route('customer.show', $customer));
 });
 

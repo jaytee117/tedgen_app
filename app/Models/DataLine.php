@@ -15,10 +15,6 @@ class DataLine extends Model
         'xero_account_code', 
     ];
 
-    public function installation(){
-        return $this->belongsTo(Installation::class, 'installation_id', 'id');
-    }
-
     public static $_data_line_type = [
         1 => 'Thermal - Out',
         2 => 'Electric - Out',

@@ -34,6 +34,7 @@ class InstallationController extends Controller
         $valid = $this->validateFields($request);
         $validated = InstallationAction::storeNewRates($valid);
         $installation = Installation::create($validated);
+        $datalines = InstallationAction::createDataLines($installation);
         return redirect()->route('installation.show', ['installation' => $installation])->with('success', 'Installation Created!');
     }
 
@@ -55,6 +56,8 @@ class InstallationController extends Controller
         $valid = $this->validateFields($request);
         $validated = InstallationAction::storeNewRates($valid);
         Installation::where('id', $id)->update($validated);
+        $installation = Installation::find($id);
+        $datalines = InstallationAction::createDataLines($installation);
         return redirect()->route('installation.show', $id)->with('success', 'Installation Edited!');
     }
 

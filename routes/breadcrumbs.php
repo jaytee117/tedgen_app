@@ -2,7 +2,6 @@
 use App\Models\Customer;
 use App\Models\Site;
 use App\Models\Installation;
-use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
  

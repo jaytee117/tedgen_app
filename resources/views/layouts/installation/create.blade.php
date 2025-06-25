@@ -2,14 +2,13 @@
     <div class="tab-content">
         <div class="tab-pane fade show active">
             @if (isset($installation))
-           ***DEV {{ count($installation->datalines) }} datalines ***<br>
-            <div class="row">
-                <form action="{{ route('installation.destroy', $installation->id) }}" method="POST" class="mb-0 pb-0">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn-red float-end mr-2" type="submit">Delete Installation</button>
-                </form>
-            </div>
+                <div class="row">
+                    <form action="{{ route('installation.destroy', $installation->id) }}" method="POST" class="mb-0 pb-0">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-red float-end mr-2" type="submit">Delete Installation</button>
+                    </form>
+                </div>
             @endif
             @if (isset($site) && !isset($installation))
                 <form action="{{ route('installation.store') }}" method="POST">
@@ -140,9 +139,27 @@
                         value="{{ old('tedgen_gas_heating', isset($installation->id) ? $installation->tedgen_gas_heating : '') }}"
                         readonly>
                 </label>
+                @if (isset($installation->datalines) && count($installation->datalines) > 2)
+                    <div class="col-md-12">
+                        <h3>Installation Logger Lines</h3>
+                        @foreach ($installation->datalines as $dataline)
+                            <div class="card">
+                                <div >
+                                    <div class="float-start">
+                                        <h5 class="card-title">{{ $dataline['line_reference'] }}</h5>
+                                        <p class="card-text">Xero Account Code : {{ $dataline['xero_account_code'] }}
+                                        </p>
+                                    </div>
+                                    <a href="#" class="float-end btn">Edit Logger Line</a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                @endif
             </div>
             <button type="submit"
-                class="btn mt-4 float-end">{{ isset($installation->id) ? 'Update Installation' : 'Create Installation' }}</button>
+                class="btn-success mt-4 float-end">{{ isset($installation->id) ? 'Update Installation' : 'Create Installation' }}</button>
             <!--validation-->
             @if ($errors->any())
                 <ul class="px-4 py-2 bg-red-100">
@@ -154,6 +171,7 @@
             </form>
             <button type="button" onclick="window.location='{{ route('site.index') }}'"
                 class="btn-red float-start">Cancel</button>
+
         </div>
         <div>
 </x-app-layout>

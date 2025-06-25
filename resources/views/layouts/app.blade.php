@@ -29,7 +29,7 @@
         <header>
             @auth
                 @if (request()->routeIs('customer.index'))
-                    <a href="{{ route('customer.create') }}" class="btn float-end">Create New Customer</a>
+                    <a href="{{ route('customer.create') }}" class="btn-success float-end">Create New Customer</a>
                 @endif
 
                 @include('layouts.sidebar')

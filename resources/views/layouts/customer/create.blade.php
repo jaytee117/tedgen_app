@@ -82,7 +82,7 @@
                 </label>
             </div>
             <button type="submit"
-                class="btn mt-4 float-end">{{ isset($customer->id) ? 'Update Customer' : 'Create Customer' }}</button>
+                class="btn-success mt-4 float-end">{{ isset($customer->id) ? 'Update Customer' : 'Create Customer' }}</button>
             <!--validation-->
             @if ($errors->any())
                 <ul class="px-4 py-2 bg-red-100">
@@ -97,7 +97,7 @@
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             @if (isset($customer))
-                <a href="{{ route('site.create', $customer->id) }}" class="btn float-end">Add a Site</a>
+                <a href="{{ route('site.create', $customer->id) }}" class="btn-success float-end">Add a Site</a>
                 @include('components.sitelist', ['sites' => $customer->site])
             @endif
 

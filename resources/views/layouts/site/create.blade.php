@@ -94,7 +94,7 @@
             </div>
 
             <button type="submit"
-                class="btn mt-4 float-end">{{ isset($site->id) ? 'Update Site' : 'Create Site' }}</button>
+                class="btn-success mt-4 float-end">{{ isset($site->id) ? 'Update Site' : 'Create Site' }}</button>
             <!--validation-->
             @if ($errors->any())
                 <ul class="px-4 py-2 bg-red-100">
@@ -109,7 +109,7 @@
         </div>
         <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
             @if (isset($site))
-                <a href="{{ route('installation.create', $site->id) }}" class="btn float-end">Add an Installation</a>
+                <a href="{{ route('installation.create', $site->id) }}" class="btn-success float-end">Add an Installation</a>
                 @include('components.installationlist', [
                     'installations' => $site->installation,
                     'site' => $site,

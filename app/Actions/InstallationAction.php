@@ -31,13 +31,12 @@ class InstallationAction
     {
 
         for ($x = 1; $x <= 3; $x++) {
-            $thermal = new DataLine;
-            $thermal->fill([
+
+            DataLine::create([
                 'installation_id' => $installation->id,
                 'data_line_type' => $x,
                 'line_reference' => Dataline::$_data_line_type[$x]
             ]);
-            $thermal->save();
         }
         return;
     }

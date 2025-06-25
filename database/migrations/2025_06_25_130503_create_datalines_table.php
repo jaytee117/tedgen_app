@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('datalines', function (Blueprint $table) {
+        Schema::create('data_lines', function (Blueprint $table) {
             $table->id();
             $table->integer('installation_id');
             $table->integer('data_line_type');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('datalines');
+        Schema::dropIfExists('data_lines');
     }
 };

@@ -57,7 +57,7 @@ class InstallationController extends Controller
         $validated = InstallationAction::storeNewRates($valid);
         Installation::where('id', $id)->update($validated);
         $installation = Installation::find($id);
-        //$datalines = InstallationAction::createDataLines($installation);
+        $datalines = InstallationAction::createDataLines($installation);
         return redirect()->route('installation.show', $id)->with('success', 'Installation Edited!');
     }
 

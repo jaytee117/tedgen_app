@@ -26,6 +26,6 @@ class Site extends Model
         if ($this->site_img) {
             return url('storage/' . $this->site_img);
         }
-        return "https://dummyimage.com/380/ffffff/000000";
+        return "https://placehold.co/600x400";
     }
 }

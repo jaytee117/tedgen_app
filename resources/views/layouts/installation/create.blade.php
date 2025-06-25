@@ -1,7 +1,11 @@
 <x-app-layout>
     <div class="tab-content">
         <div class="tab-pane fade show active">
-
+            <form action="{{ route('installation.destroy', $installation->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn-red my-4 float-end" type="submit">Delete Installation</button>
+            </form>
             @if (isset($site) && !isset($installation))
                 <form action="{{ route('installation.store') }}" method="POST">
             @endif
@@ -25,7 +29,8 @@
 
                         <option value="" disabled selected>Select a status</option>
                         @foreach (App\Models\Installation::$_machine_status as $key => $value)
-                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->machine_status) selected @endif>{{ $value }}</option>
+                            <option value="{{ $key }}" @if (isset($installation) && $key == $installation->machine_status) selected @endif>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -33,7 +38,8 @@
                     <select id="machine_type" name="machine_type" required>
                         <option value="" disabled selected>Select a type</option>
                         @foreach (App\Models\Installation::$_machine_type as $key => $value)
-                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->machine_type) selected @endif>{{ $value }}</option>
+                            <option value="{{ $key }}" @if (isset($installation) && $key == $installation->machine_type) selected @endif>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </label>
@@ -41,7 +47,8 @@
                     <select id="logger_type" name="logger_type" required>
                         <option value="" disabled selected>Select a type</option>
                         @foreach (App\Models\Installation::$_logger_type as $key => $value)
-                            <option value="{{ $key }}" @if( isset($installation) && $key == $installation->logger_type) selected @endif>{{ $value }}</option>
+                            <option value="{{ $key }}" @if (isset($installation) && $key == $installation->logger_type) selected @endif>
+                                {{ $value }}</option>
                         @endforeach
                     </select>
                 </label>

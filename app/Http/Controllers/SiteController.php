@@ -55,8 +55,8 @@ class SiteController extends Controller
         if ($geocode->getStatus() == 200):
             $validated = $geocode->storeResults($validated);
         endif;
-        Site::create($validated);
-        return redirect()->route('site.index')->with('success', 'Site Created!');
+        $site = Site::create($validated);
+        return redirect()->route('site.show', ['site' => $site])->with('success', 'Site Created!');
     }
 
     private function validateFields(Request $request)

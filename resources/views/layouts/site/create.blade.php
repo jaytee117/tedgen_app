@@ -27,9 +27,7 @@
             <div class="row">
                 @if (isset($site))
                     <div class="col-md-3" id="imageUploader">
-                        @if (isset($site->site_img))
-                            <img src="{{ $site->getImageURL() }}" alt="Uploaded File" id="preview">
-                        @endif
+                        <img src="{{ $site->getImageURL() }}" alt="Uploaded File" id="preview">
                         <label for="site_img">Upload an Image</label>
                         <input type="file" id="site_img" name="site_img"
                             value="{{ old('site_img', isset($site->id) ? $site->site_img : '') }}" class="hidden"
@@ -110,9 +108,12 @@
                 class="btn-red float-start">Cancel</button>
         </div>
         <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
-            @if(isset($site))
-            <a href="{{ route('installation.create', $site->id) }}" class="btn float-end">Add an Installation</a>
-            @include('components.installationlist', ['installations' => $site->installation, 'site' => $site])
+            @if (isset($site))
+                <a href="{{ route('installation.create', $site->id) }}" class="btn float-end">Add an Installation</a>
+                @include('components.installationlist', [
+                    'installations' => $site->installation,
+                    'site' => $site,
+                ])
             @endif
         </div>
     </div>

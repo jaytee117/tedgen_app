@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NinjaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SiteController;
@@ -33,10 +32,6 @@ Route::middleware('auth')->controller(NinjaController::class)->group(function ()
 
 //dashboard route
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard')->middleware('auth');
-
-//file upload
-Route::post('/upload', [FileUploadController::class, 'upload'])->name('upload')->middleware('auth');
-Route::get('/showupload',[FileUploadController::class,'showupload'])->name('showupload')->middleware('auth');
 
 //user routes
 Route::middleware('auth')->controller(UserController::class)->group(function () {
@@ -68,6 +63,7 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::get('/installation/create/{site}', 'create')->middleware(['role:employee|admin'])->name('installation.create');
     Route::get('/installation/{installation}/', 'show')->name('installation.show');
     Route::post('/installation/update/{id}', 'update')->middleware(['role:employee|admin'])->name('installation.update');
+    Route::delete('/installation/{installation}', 'destroy')->name('installation.destroy');
 });
 
 

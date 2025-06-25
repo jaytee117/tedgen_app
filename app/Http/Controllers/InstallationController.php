@@ -33,8 +33,8 @@ class InstallationController extends Controller
     {
         $valid = $this->validateFields($request);
         $validated = InstallationAction::storeNewRates($valid);
-        Installation::create($validated);
-        return redirect()->route('site.index')->with('success', 'Installation Created!');
+        $installation = Installation::create($validated);
+        return redirect()->route('installation.show', ['installation' => $installation])->with('success', 'Installation Created!');
     }
 
     /**
@@ -46,13 +46,6 @@ class InstallationController extends Controller
         return view('layouts.installation.create', ["installation" => $installation]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +61,11 @@ class InstallationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Installation $installation)
     {
-        //
+        $inst = $installation;
+        $installation->delete();
+        return redirect()->route('site.show', $inst->site_id)->with('success', 'Installation Deleted!');
     }
 
     private function validateFields(Request $request)

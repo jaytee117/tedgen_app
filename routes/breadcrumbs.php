@@ -40,8 +40,6 @@ Breadcrumbs::for('installation.show', function (BreadcrumbTrail $trail, Installa
 });
 
 Breadcrumbs::for('installation.create', function (BreadcrumbTrail $trail, Installation $installation): void {
-    $site = Site::find($installation->site_id);
-    $trail->parent('site.show', $site);
     $trail->push($installation->asset_id, route('installation.create', $installation));
 });
 

@@ -11,18 +11,22 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail): void {
 });
 
 Breadcrumbs::for('customer.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
     $trail->push('Customers', route('customer.index'));
 });
 
 Breadcrumbs::for('site.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
     $trail->push('Sites', route('site.index'));
 });
 
 Breadcrumbs::for('installation.index', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
     $trail->push('Installations', route('installation.index'));
 });
 
 Breadcrumbs::for('customer.create', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
     $trail->push('Create Customer', route('customer.create'));
 });
 
@@ -54,5 +58,6 @@ Breadcrumbs::for('installation.create', function (BreadcrumbTrail $trail, Site $
 });
 
 Breadcrumbs::for('user.show', function (BreadcrumbTrail $trail): void {
+    $trail->parent('dashboard');
     $trail->push('User Profile', route('user.show'));
 });

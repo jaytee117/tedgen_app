@@ -35,7 +35,7 @@ Breadcrumbs::for('site.show', function (BreadcrumbTrail $trail, Site $site): voi
 
 Breadcrumbs::for('site.create', function (BreadcrumbTrail $trail, Customer $customer): void {
     $trail->parent('customer.show', $customer);
-    $trail->push('Create Site', route('site.show', $site));
+    $trail->push('Create Site', route('site.create', $customer));
 });
 
 Breadcrumbs::for('installation.show', function (BreadcrumbTrail $trail, Installation $installation): void {

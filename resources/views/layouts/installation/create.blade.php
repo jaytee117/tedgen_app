@@ -1,11 +1,13 @@
 <x-app-layout>
     <div class="tab-content">
         <div class="tab-pane fade show active">
-            <form action="{{ route('installation.destroy', $installation->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn-red my-4 float-end" type="submit">Delete Installation</button>
-            </form>
+            @if ($installation->id)
+                <form action="{{ route('installation.destroy', $installation->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn-red my-4 float-end" type="submit">Delete Installation</button>
+                </form>
+            @endif
             @if (isset($site) && !isset($installation))
                 <form action="{{ route('installation.store') }}" method="POST">
             @endif

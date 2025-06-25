@@ -2,11 +2,13 @@
     <div class="tab-content">
         <div class="tab-pane fade show active">
             @if (isset($installation))
-                <form action="{{ route('installation.destroy', $installation->id) }}" method="POST">
+            <div class="row">
+                <form action="{{ route('installation.destroy', $installation->id) }}" method="POST" class="mb-0 pb-0">
                     @csrf
                     @method('DELETE')
-                    <button class="btn-red my-4 float-end" type="submit">Delete Installation</button>
+                    <button class="btn-red float-end mr-2" type="submit">Delete Installation</button>
                 </form>
+            </div>
             @endif
             @if (isset($site) && !isset($installation))
                 <form action="{{ route('installation.store') }}" method="POST">

@@ -1,3 +1,4 @@
-<x-app-layout>
+@extends('theme.default')
+@section('content')
 USER CREATE/EDIT/SHOW
-</x-app-layout>
+@endsection

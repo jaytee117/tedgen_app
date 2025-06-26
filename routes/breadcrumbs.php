@@ -1,10 +1,15 @@
 <?php
+
 use App\Models\Customer;
 use App\Models\Site;
 use App\Models\Installation;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
- 
+
+Breadcrumbs::for('show.login', function (BreadcrumbTrail $trail): void {
+    $trail->push('Login', route('show.login'));
+});
+
 Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail): void {
     $trail->push('Dashboard', route('dashboard'));
 });

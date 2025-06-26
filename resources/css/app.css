@@ -10,114 +10,33 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-@tailwind base;
-@tailwind components;
+/*@tailwind base;*/
+/*@tailwind components;*/
 @tailwind utilities;
 
-
 body {
-    @apply bg-gray-100 text-gray-700;
+    background: #f0efef;
+}
+main {
+    margin-bottom:50px;
 }
 
-h1 {
-    @apply text-2xl font-bold text-red-500;
+.breadcrumb-bar {
+    float: left;
+    width:90%;
+    padding-top:14px;
 }
-
-h2 {
-    @apply text-xl font-bold my-4;
+.breadcrumb-item.active{
+    color:aquamarine;
 }
-
-h3 {
-    @apply text-lg font-bold my-4;
-}
-
-ul {
-    @apply my-10;
-}
-
-p {
-    @apply my-2;
-}
-
-/* header */
-header {
-    @apply bg-white;
-
-    nav {
-        @apply flex items-center gap-2 px-5 py-4 mx-auto;
-
-    }
-
-    h1 {
-        @apply mr-auto;
-    }
-
-    a {
-        @apply no-underline;
-    }
-
-    a:hover {
-        @apply text-white no-underline bg-sky-700;
-    }
-
-    .bg-blue-600 {
-        @apply text-white bg-sky-700;
-    }
-
-}
-
-/* form elements */
-form {
-    @apply block w-full mt-2 mb-4 p-2;
-}
-
-
-hr {
-    @apply text-transparent;
-}
-
-/* custom classes */
-.container {
-    @apply max-w-screen-lg mx-auto px-12 py-8;
+.breadcrumb-item a {
+    text-decoration: none;
+    color:azure;
 }
 
 .card {
-    @apply bg-white rounded border border-gray-200 px-3 py-3 my-2 flex justify-between;
-}
-
-.highlight {
-    @apply border-l-4 border-l-red-500;
-}
-
-.btn {
-    @apply rounded px-3 py-2 bg-gray-300 hover:bg-sky-900 hover:text-white;
-}
-
-.btn-red {
-    @apply rounded px-3 py-2 text-white bg-red-400 hover:bg-red-500 hover:text-white;
-}
-
-.btn-success {
-    @apply rounded px-3 py-2 bg-green-700 hover:bg-green-800 hover:text-white;
-}
-
-form input,
-form select,
-form textarea {
-    @apply  appearance-none border-2 border-gray-200 w-full py-1 px-1 text-gray-700 leading-tight;
-}
-.nav-tabs {
-    @apply mt-1;
-}
-.tab-content {
-    @apply bg-white border-l-gray-200 border-l-1;
-}
-.tab-pane form {
-    @apply mt-0;
-}
-
-.logout {
-    @apply w-auto;
+    padding:10px;
+    margin-bottom:5px;
 }
 
 /*datatables*/
@@ -158,12 +77,34 @@ div.dt-container .dt-paging .dt-paging-button {
     padding: 6px 10px;
     font-size: 12px;
 }
+
 /*Upload file text button*/
 #imageUploader label {
     @apply block cursor-pointer bg-gray-300 text-black w-48 text-center mt-2 rounded-md leading-8;
 }
 
 #imageUploader .hidden {
-  position: absolute;
-  left: -99999px;
+    position: absolute;
+    left: -99999px;
+}
+
+.nav-tabs {
+    @apply mt-1;
+}
+
+.tab-content {
+    @apply bg-gray-50 border-l-gray-200 border-l-1;
+}
+
+.nav-tabs .nav-link.active {
+    @apply bg-gray-50;
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.tab-pane {
+    padding: 10px;
 }

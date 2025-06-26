@@ -19,28 +19,52 @@
 
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 md:pl-64">
-        @if (session('success'))
-            <div id="flash" class="p-4 text-center bg-green-50 text-green-500 font-bold">
-                {{ session('success') }}
-            </div>
-        @endif
-        <header>
-            @auth
-                @if (request()->routeIs('customer.index'))
-                    <a href="{{ route('customer.create') }}" class="btn-success float-end">Create New Customer</a>
-                @endif
+<body>
+    <header>
+        @auth
+            @if (request()->routeIs('customer.index'))
+                <a href="{{ route('customer.create') }}" class="btn-success float-end">Create New Customer</a>
+            @endif
 
-                @include('layouts.sidebar')
-            @endauth
-            {{ Breadcrumbs::render() }}
-        </header>
+            
+        @endauth
+        {{ Breadcrumbs::render() }}
+    </header>
 
-        <main class=" min-h-[200px] pt-4 w-full px-4 mx-auto">
+    <div class="main-content">
+
+        <div class="sidebar">
+
+            @include('layouts.newsidebar')
+
+        </div>
+
+        <div class="content">
+            @if (session('success'))
+                <div id="flash" class="p-4 text-center bg-green-50 text-green-500 font-bold">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             {{ $slot }}
-        </main>
+
+        </div>
+
     </div>
+
+    <footer>
+        // Footer stuff
+    </footer>
 </body>
+
+
+
+
+
+
+
+
+
+
 
 </html>

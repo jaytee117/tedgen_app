@@ -27,8 +27,9 @@
                     <div class="col-md-6">
                         <h3><i class="fa fa-cog"></i> CHP Installation Data</h3>
                     </div>
-                    @if (isset($installation))
-                        <div class="col-md-6">
+
+                    <div class="col-md-6">
+                        @if (isset($installation))
                             <form action="{{ route('installation.destroy', $installation->id) }}" method="POST"
                                 class="mb-0 pb-0">
                                 @csrf
@@ -36,8 +37,9 @@
                                 <button class="btn btn-danger float-end mr-2" style="width:160px" type="submit">Delete
                                     Installation</button>
                             </form>
-                        </div>
-                    @endif
+                        @endif
+                    </div>
+
                     <input type="hidden" id="account_id" name="account_id"
                         value="{{ old('account_id', isset($site->id) ? $site->account_id : $installation->account_id) }}">
                     <input type="hidden" id="site_id" name="site_id"
@@ -179,7 +181,7 @@
             <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
                 @if (isset($installation->datalines) && count($installation->datalines) > 2)
                     <div class="col-md-12">
-                        <h3 ><i class="fa fa-network-wired"></i> Installation Logger Lines</h3>
+                        <h3><i class="fa fa-network-wired"></i> Installation Logger Lines</h3>
                         @foreach ($installation->datalines as $dataline)
                             <div class="card">
                                 <div>

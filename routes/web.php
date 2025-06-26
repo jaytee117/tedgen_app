@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\InstallationController;
+use App\Http\Controllers\DatalineController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,4 +67,9 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::delete('/installation/{installation}', 'destroy')->name('installation.destroy');
 });
 
+//dataline routes
+Route::middleware('auth')->controller(DatalineController::class)->group(function () {
+    Route::get('/dataline/{dataline}', 'show')->name('dataline.show');
+    Route::post('/dataline/update/{id}', 'update')->middleware(['role:employee|admin'])->name('dataline.update');
+});
 

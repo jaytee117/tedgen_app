@@ -3,6 +3,7 @@
 use App\Models\Customer;
 use App\Models\Site;
 use App\Models\Installation;
+use App\Models\DataLine;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -59,6 +60,12 @@ Breadcrumbs::for('installation.show', function (BreadcrumbTrail $trail, Installa
 Breadcrumbs::for('installation.create', function (BreadcrumbTrail $trail, Site $site): void {
     $trail->parent('site.show', $site);
     $trail->push('Create Installation', route('installation.create', $site));
+});
+
+Breadcrumbs::for('dataline.show', function (BreadcrumbTrail $trail, DataLine $dataline): void {
+    $installation = Installation::find($dataline->installation_id);
+    $trail->parent('installation.show', $installation);
+    $trail->push($dataline->line_reference, route('dataline.show', $dataline));
 });
 
 Breadcrumbs::for('user.show', function (BreadcrumbTrail $trail): void {

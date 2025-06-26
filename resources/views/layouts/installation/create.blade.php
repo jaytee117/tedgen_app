@@ -190,7 +190,13 @@
                                         <p class="card-text">Xero Account Code : {{ $dataline['xero_account_code'] }}
                                         </p>
                                     </div>
-                                    <a href="#" class="float-end btn">Edit Logger Line</a>
+                                    <div class="float-end">
+                                        <button type="button"
+                                            onclick="window.location='{{ route('dataline.show', $dataline->id) }}'"
+                                            class="btn btn-warning btn-block float-start">Edit Logger line</button>
+
+                                    </div>
+
                                 </div>
                             </div>
                         @endforeach

@@ -1,9 +1,19 @@
 @extends('theme.default')
 @section('content')
     <div class="container-fluid px-4">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">CHP Installation Datas</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="chp-tab" data-bs-toggle="tab" data-bs-target="#chp" type="button"
+                    role="tab" aria-controls="data" aria-selected="false">Logger Data Lines</button>
+            </li>
+        </ul>
         <div class="tab-content">
 
-            <div class="tab-pane fade show active">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                 @if (isset($site) && !isset($installation))
                     <form action="{{ route('installation.store') }}" method="POST">
@@ -15,7 +25,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
-                        <h3>CHP Installation Data</h3>
+                        <h3><i class="fa fa-cog"></i> CHP Installation Data</h3>
                     </div>
                     @if (isset($installation))
                         <div class="col-md-6">
@@ -74,7 +84,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <h3 class="mt-4">Supplier Rates</h3>
+                    <h3 class="mt-4"><i class="fa fa-plug"></i> Supplier Rates</h3>
                     <label for="elec_day_rate" class="col-md-3">Electric Day Rate:
                         <input class="form-control" type="text" id="elec_day_rate" name="elec_day_rate"
                             value="{{ old('elec_day_rate', isset($installation->id) ? $installation->elec_day_rate : '') }}">
@@ -132,7 +142,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <h3 class="mt-4">Calculated Rates</h3>
+                    <h3 class="mt-4"><i class="fa fa-lock"></i> Calculated Rates</h3>
                     <label for="tedgen_elec_day" class="col-md-4">Calculated Electric Day Rate:
                         <input class="form-control" type="text" id="tedgen_elec_day" name="tedgen_elec_day"
                             value="{{ old('tedgen_elec_day', isset($installation->id) ? $installation->tedgen_elec_day : '') }}"
@@ -148,23 +158,7 @@
                             value="{{ old('tedgen_gas_heating', isset($installation->id) ? $installation->tedgen_gas_heating : '') }}"
                             readonly>
                     </label>
-                    @if (isset($installation->datalines) && count($installation->datalines) > 2)
-                        <div class="col-md-12">
-                            <h3>Installation Logger Lines</h3>
-                            @foreach ($installation->datalines as $dataline)
-                                <div class="card">
-                                    <div>
-                                        <div class="float-start">
-                                            <h5 class="card-title">{{ $dataline['line_reference'] }}</h5>
-                                            <p class="card-text">Xero Account Code : {{ $dataline['xero_account_code'] }}
-                                            </p>
-                                        </div>
-                                        <a href="#" class="float-end btn">Edit Logger Line</a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
+
                 </div>
                 <!--validation-->
                 @if ($errors->any())
@@ -181,6 +175,25 @@
                         class="btn btn-warning btn-block float-start">Go Back</button>
                 </div>
                 </form>
+            </div>
+            <div class="tab-pane fade" id="chp" role="tabpanel" aria-labelledby="chp-tab">
+                @if (isset($installation->datalines) && count($installation->datalines) > 2)
+                    <div class="col-md-12">
+                        <h3 ><i class="fa fa-network-wired"></i> Installation Logger Lines</h3>
+                        @foreach ($installation->datalines as $dataline)
+                            <div class="card">
+                                <div>
+                                    <div class="float-start">
+                                        <h5 class="card-title">{{ $dataline['line_reference'] }}</h5>
+                                        <p class="card-text">Xero Account Code : {{ $dataline['xero_account_code'] }}
+                                        </p>
+                                    </div>
+                                    <a href="#" class="float-end btn">Edit Logger Line</a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <div style="clear:both"></div>
         </div>

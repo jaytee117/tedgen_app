@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Models\Site;
+use App\Models\WeatherReading;
 use App\Services\WeatherLookup;
 
 class FetchWeatherCommand extends Command
@@ -40,6 +41,18 @@ class FetchWeatherCommand extends Command
             if ($weather->getStatus() == 200):
                 $result = $weather->getResults();
                 //eventually, we will save the data to its own model too.
+                $db = new WeatherReading();
+                $db->site_id = $site->id;
+                $db->reading_date = date('Y-m-d H');
+                $db->temp = $result->main->temp;
+                $db->pressure = $result->main->pressure;
+                $db->humidity = $result->main->humidity;
+                $db->wind_speed = $result->wind->speed;
+                $db->cloud = $result->clouds->all;
+                $db->sunrise = date('Y-m-d H:i:s', $result->sys->sunrise);
+                $db->sunset = date('Y-m-d H:i:s', $result->sys->sunset);
+                $db->icon = $result->weather[0]->icon;
+                $db->save();
                 $site->current_temp = $result->main->temp;
                 $site->weather_icon = $result->weather[0]->icon;
                 $site->save();

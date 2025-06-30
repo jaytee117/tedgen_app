@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weatherreadings', function (Blueprint $table) {
+        Schema::create('weather_readings', function (Blueprint $table) {
             $table->id();
             $table->integer('site_id');
             $table->timestamp('reading_date');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weatherreadings');
+        Schema::dropIfExists('weather_readings');
     }
 };

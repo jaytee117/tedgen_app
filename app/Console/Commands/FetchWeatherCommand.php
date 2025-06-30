@@ -31,6 +31,7 @@ class FetchWeatherCommand extends Command
     {
         Log::info('Get Weather Reports scheduling');
         $site_array = Site::where('lat')->get();
+        Log::info($site_array);
         $count = 1;
         foreach($site_array as $site):
             if($count % 50 == 0):

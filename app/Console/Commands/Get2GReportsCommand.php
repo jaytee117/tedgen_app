@@ -19,7 +19,7 @@ class Get2GReportsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Fetches the machines readings via the 2g API';
 
     /**
      * Execute the console command.

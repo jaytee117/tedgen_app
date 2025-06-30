@@ -8,4 +8,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('app:get2-g-reports-command')->everyMinute();
+Schedule::command('app:get2-g-reports-command')->everyThirtyMinutes();
+
+Schedule::command('app:fetch-weather-command')->hourly();

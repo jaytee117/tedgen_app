@@ -29,7 +29,7 @@ class FetchWeatherCommand extends Command
      */
     public function handle()
     {
-        Log::info('Get 2G Reports scheduling');
+        Log::info('Get Weather Reports scheduling');
         $site_array = Site::where('lat')->get();
         $count = 1;
         foreach($site_array as $site):
@@ -40,7 +40,6 @@ class FetchWeatherCommand extends Command
             $weather = new WeatherLookup($site->lat, $site->lng);
             if ($weather->getStatus() == 200):
                 $result = $weather->getResults();
-                //eventually, we will save the data to its own model too.
                 $db = new WeatherReading();
                 $db->site_id = $site->id;
                 $db->reading_date = date('Y-m-d H');
@@ -56,6 +55,8 @@ class FetchWeatherCommand extends Command
                 $site->current_temp = $result->main->temp;
                 $site->weather_icon = $result->weather[0]->icon;
                 $site->save();
+            else:
+                Log::error($weather->getStatus() . ' weather API status');
             endif;
             $count++;
         endforeach;

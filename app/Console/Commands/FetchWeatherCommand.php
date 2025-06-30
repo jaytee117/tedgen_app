@@ -30,7 +30,7 @@ class FetchWeatherCommand extends Command
     public function handle()
     {
         Log::info('Get Weather Reports scheduling');
-        $site_array = Site::where('lat')->get();
+        $site_array = Site::all();
         Log::info($site_array);
         $count = 1;
         foreach($site_array as $site):

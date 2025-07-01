@@ -20,7 +20,7 @@
                     CHP Installations
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link" href="/users">
+                <a class="nav-link" href="/user">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Users
                 </a>

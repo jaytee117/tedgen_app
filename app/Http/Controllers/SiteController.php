@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Models\Customer;
 use App\Services\GeoCoder;
-use Illuminate\Support\Facades\Storage;
 
 class SiteController extends Controller
 {

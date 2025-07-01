@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('credentials', function (Blueprint $table) {
             $table->id();
             $table->integer('provider');
-            $table->string('access_token');
+            $table->longText('access_token');
             $table->integer('expires');
             $table->timestamps();
         });

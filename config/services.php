@@ -17,6 +17,12 @@ return [
     'weatherlookup' => [
         'key' => env('OPENWEATHER_KEY'),
     ],
+    '2gapi' => [
+        'client_id' => env('2G_CLIENT_ID'),
+        'client_secret' => env('2G_CLIENT_SECRET'),
+        'token_url' => env('2G_TOKEN_URL'),
+        ''
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

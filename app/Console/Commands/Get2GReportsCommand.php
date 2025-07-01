@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Services\TwoGApi;
 
 class Get2GReportsCommand extends Command
 {
@@ -27,5 +28,6 @@ class Get2GReportsCommand extends Command
     public function handle()
     {
         Log::info('Get 2G Reports scheduling');
+        TwoGApi::get2GToken();
     }
 }

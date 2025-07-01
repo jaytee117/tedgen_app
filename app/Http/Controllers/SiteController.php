@@ -12,6 +12,7 @@ class SiteController extends Controller
 {
     public function index()
     {
+        dd('test');
         $sites = Site::with('account')->orderBy('created_at', 'desc')->paginate(10);
         return view('layouts.site.index', ['sites' => $sites]);
     }

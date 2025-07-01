@@ -70,7 +70,7 @@
                             @endforeach
                         </select>
                     </label>
-                    <label for="ip_address" class="col-md-3">IP Address/Client ID:
+                    <label for="ip_address" class="col-md-3">IP Address/2g Asset ID:
                         <input class="form-control" type="text" id="ip_address" name="ip_address"
                             value="{{ old('ip_address', isset($installation->id) ? $installation->ip_address : '') }}">
                     </label>

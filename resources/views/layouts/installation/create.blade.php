@@ -13,20 +13,29 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                @if (isset($site) && !isset($installation))
-                    <form action="{{ route('installation.store') }}" method="POST">
-                @endif
-                @if (isset($installation))
-                    <form action="{{ route('installation.update', $installation->id) }}" method="POST">
-                @endif
-                @csrf
+
                 <div class="row">
                     <div class="col-md-6">
                         <h3><i class="fa fa-cog"></i> CHP Installation Data</h3>
                     </div>
                     <div class="col-md-6">
-                        
+                        @if (isset($installation))
+                            <form action="{{ route('installation.destroy', $installation->id) }}" method="POST"
+                                class="mb-0 pb-0">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger float-end mr-2" style="width:160px" type="submit">Delete
+                                    Installation</button>
+                            </form>
+                        @endif
                     </div>
+                    @if (isset($site) && !isset($installation))
+                        <form action="{{ route('installation.store') }}" method="POST">
+                    @endif
+                    @if (isset($installation))
+                        <form action="{{ route('installation.update', $installation->id) }}" method="POST">
+                    @endif
+                    @csrf
                     <input type="hidden" id="account_id" name="account_id"
                         value="{{ old('account_id', isset($site->id) ? $site->account_id : $installation->account_id) }}">
                     <input type="hidden" id="site_id" name="site_id"

@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'weatherlookup' => [
+        'key' => env('OPENWEATHER_KEY'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

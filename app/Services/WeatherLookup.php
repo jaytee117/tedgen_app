@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 
 class WeatherLookup
@@ -10,7 +11,7 @@ class WeatherLookup
     private $results;
     private $lat;
     private $lng;
-    private $key = '878bec3083b6419fd75968702c465323';
+    private $key = Config::get('services.weatherlookup.key');
     private $status;
 
     public function __construct($lat, $lng) {

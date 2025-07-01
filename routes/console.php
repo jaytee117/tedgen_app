@@ -10,4 +10,4 @@ Artisan::command('inspire', function () {
 
 Schedule::command('app:get2-g-reports-command')->hourly();
 
-Schedule::command('app:fetch-weather-command')->hourlyAt(55);
+Schedule::command('app:fetch-weather-command')->hourlyAt(57);

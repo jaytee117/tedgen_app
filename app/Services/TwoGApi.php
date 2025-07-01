@@ -48,7 +48,7 @@ class TwoGApi
         $request_headers = [
             'Authorization: Bearer ' . $credentials->access_token,
         ];
-        $installs = Installation::whereNotNull('ip_address')->get();
+        $installs = Installation::where('logger_type', 4)->whereNotNull('ip_address')->get();
         foreach ($installs as $install) {
             $url = 'https://api.2-g.energy/idc/v2/assets/chp/' . $install->ip_address . '/reports?filter=reportDateTime%20gt%20%22' . $date . 'T' . $hour . ':00%22%20AND%20reportDateTime%20lt%20%22' . $date . 'T' . $hour . ':59%22%20&take=1&skip=0';
             $ch = curl_init();

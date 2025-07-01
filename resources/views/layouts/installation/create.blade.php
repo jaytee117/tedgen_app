@@ -29,6 +29,7 @@
                             </form>
                         @endif
                     </div>
+                    <hr>
                     @if (isset($site) && !isset($installation))
                         <form action="{{ route('installation.store') }}" method="POST">
                     @endif

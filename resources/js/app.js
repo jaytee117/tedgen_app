@@ -6,7 +6,7 @@ function initCustomerTable() {
         "sDom": '<"top"f<"controls"><"clear">>rt<"bottom"ilp><"clear">',
 
         fnInitComplete: function () {
-            $('.dt-search input').attr("placeholder", "Search");
+           
 
         },
         oLanguage: {
@@ -22,8 +22,7 @@ function initSiteTable() {
         "sDom": '<"top"f<"controls"><"clear">>rt<"bottom"ilp><"clear">',
 
         fnInitComplete: function () {
-            $('.dt-search input').attr("placeholder", "Search");
-
+           
         },
         oLanguage: {
             "sSearch": "_INPUT_" //search
@@ -38,8 +37,7 @@ function initInstallationTable() {
         "sDom": '<"top"f<"controls"><"clear">>rt<"bottom"ilp><"clear">',
 
         fnInitComplete: function () {
-            $('.dt-search input').attr("placeholder", "Search");
-
+            
         },
         oLanguage: {
             "sSearch": "_INPUT_" //search

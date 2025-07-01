@@ -12,6 +12,8 @@ class TwoGApi
         $credentials = Credentials::where('provider', 1)->first();
         $expires = $credentials->expires;
         if ($expires > $now):
+            Log::info('expires = ' . $credentials->expires);
+            Log::info('now = '. $now);
             Log::info('2g token still valid');
         else:
             $client_id = Config::get('services.2gapi.client_id');

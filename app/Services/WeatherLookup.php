@@ -29,6 +29,7 @@ class WeatherLookup
 
     private function doLookup() {
         $returnurl = $this->endpoint . 'lat=' . $this->lat . '&lon=' . $this->lng . '&APPID=' . $this->key;
+        Log::info($returnurl);
         $ch1 = curl_init();
         if (!$ch1)
             Log::info("Couldn't initialize a cURL handle for the Weather Lookup");

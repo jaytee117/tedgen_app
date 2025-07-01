@@ -29,8 +29,8 @@
                             </form>
                         @endif
                     </div>
-                    </div>
-                    <div class="row">
+                </div>
+                
                     @if (isset($site) && !isset($installation))
                         <form action="{{ route('installation.store') }}" method="POST">
                     @endif
@@ -38,6 +38,7 @@
                         <form action="{{ route('installation.update', $installation->id) }}" method="POST">
                     @endif
                     @csrf
+                    <div class="row">
                     <input type="hidden" id="account_id" name="account_id"
                         value="{{ old('account_id', isset($site->id) ? $site->account_id : $installation->account_id) }}">
                     <input type="hidden" id="site_id" name="site_id"

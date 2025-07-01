@@ -11,10 +11,11 @@ class WeatherLookup
     private $results;
     private $lat;
     private $lng;
-    private $key = Config::get('services.weatherlookup.key');
+    private $key;
     private $status;
 
     public function __construct($lat, $lng) {
+        $this->key = Config::get('services.weatherlookup.key');
         $this->lat = $lat;
         $this->lng = $lng;
         $this->doLookup();

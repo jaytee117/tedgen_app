@@ -10,7 +10,7 @@ class WeatherLookup
     private $results;
     private $lat;
     private $lng;
-    private $key = config('custom.openweather_key');
+    private $key = '878bec3083b6419fd75968702c465323';
     private $status;
 
     public function __construct($lat, $lng) {

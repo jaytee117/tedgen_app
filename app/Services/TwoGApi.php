@@ -64,7 +64,7 @@ class TwoGApi
             $result = curl_exec($ch);
             $decoded = json_decode($result);
             $data = $decoded->data;
-
+            Log::info(print_r($decoded, true));
             $results = [];
             foreach ($data as $line):
                 $datetime = new \DateTime($line->reportDateTime);
@@ -89,8 +89,7 @@ class TwoGApi
 
 
             if (count($data)):
-                Log::info('>>> ' . $install->asset_id . ' has sent readings.');
-                Log::info(print_r($results, true));
+                Log::info($install->asset_id . ' has sent readings.');
                 TwoGApi::parse2GReadings($results, $date, $install->site_id, $install->id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
@@ -102,10 +101,8 @@ class TwoGApi
     {
         $elec_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 2)->first();
         $elec_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $elec_dataline->id)->where('reading_date', $date)->first();
-        
         $gas_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 3)->first();
         $gas_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $gas_dataline->id)->where('reading_date', $date)->first();
-        
         $therm_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 1)->first();
         $therm_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $therm_dataline->id)->where('reading_date', $date)->first();
         if ($elec_reading):
@@ -168,7 +165,7 @@ class TwoGApi
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
-        foreach ($data as $line):            
+        foreach ($data as $line):
             $key = array_search($line->time, $timeArray);
             if (false !== $key):
                 switch ($type) {

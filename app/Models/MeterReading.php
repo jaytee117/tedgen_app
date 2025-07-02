@@ -14,7 +14,7 @@ class MeterReading extends Model
         'reading_type',
         'meter_reference',
         'unit',
-        'contract_id',
+        'dataline_id',
         'site_id',
         'installation_id',
         'op_count',

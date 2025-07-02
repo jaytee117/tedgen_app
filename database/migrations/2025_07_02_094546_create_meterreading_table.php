@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('site_id')->nullable();
             $table->integer('installation_id')->nullable();
-            $table->integer('contract_id')->nullable();
+            $table->integer('dataline_id')->nullable();
             $table->timestamp('reading_date');
             $table->integer('reading_type');
             $table->string('meter_number')->nullable();

@@ -99,26 +99,28 @@ class TwoGApi
 
     public static function parse2GReadings($data, $date, $siteID, $installID)
     {
-        $elec_contract = DataLine::where('installation_id', $installID)->where('data_line_type', 2)->first();
-        $elec_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $elec_contract->chp_contract_id)->where('reading_date', $date)->first();
-        $gas_contract = DataLine::where('installation_id', $installID)->where('data_line_type', 3)->first();
-        $gas_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $gas_contract->chp_contract_id)->where('reading_date', $date)->first();
-        $therm_contract = DataLine::where('installation_id', $installID)->where('data_line_type', 1)->first();
-        $therm_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $therm_contract->chp_contract_id)->where('reading_date', $date)->first();
+        $elec_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 2)->first();
+        $elec_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $elec_dataline->id)->where('reading_date', $date)->first();
+        
+        $gas_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 3)->first();
+        $gas_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $gas_dataline->id)->where('reading_date', $date)->first();
+        
+        $therm_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 1)->first();
+        $therm_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $therm_dataline->id)->where('reading_date', $date)->first();
         if ($elec_reading):
             TwoGApi::append2GReading(1, $elec_reading, $data, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(1, $data, $elec_contract, $siteID, $date, $installID);
+            TwoGApi::new2GReading(1, $data, $elec_dataline, $siteID, $date, $installID);
         endif;
         if ($gas_reading):
             TwoGApi::append2GReading(2, $gas_reading, $data, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(2, $data, $gas_contract, $siteID, $date, $installID);
+            TwoGApi::new2GReading(2, $data, $gas_dataline, $siteID, $date, $installID);
         endif;
         if ($therm_reading):
             TwoGApi::append2GReading(3, $therm_reading, $data, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(3, $data, $therm_contract, $siteID, $date, $installID);
+            TwoGApi::new2GReading(3, $data, $therm_dataline, $siteID, $date, $installID);
         endif;
     }
 
@@ -161,7 +163,7 @@ class TwoGApi
         $crm_reading->save();
     }
 
-    public static function new2GReading($type, $data, $contract, $siteID, $date, $installID)
+    public static function new2GReading($type, $data, $dataline, $siteID, $date, $installID)
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
@@ -195,10 +197,10 @@ class TwoGApi
         $reading = new MeterReading();
         $reading->site_id = $siteID;
         $reading->installation_id = $installID;
-        $reading->contract_id = $contract->chp_contract_id;
+        $reading->dataline_id = $dataline->id;
         $reading->reading_type = 2;
         $reading->reading_date = $date;
-        $reading->meter_reference = $contract->meter_reference;
+        $reading->meter_reference = $dataline->meter_reference;
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
         $reading->save();

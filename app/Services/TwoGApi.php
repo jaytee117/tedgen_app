@@ -66,20 +66,20 @@ class TwoGApi
             $data = $decoded->data;
             if (count($data)):
                 Log::info('>>> ' . $install->asset_id . ' has sent readings.');
-                TwoGApi::parse2GReadings($data, $date, $install->site_id);
+                TwoGApi::parse2GReadings($data, $date, $install->site_id, $install->id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
             endif;
         }
     }
 
-    public static function parse2GReadings($data, $date, $siteID)
+    public static function parse2GReadings($data, $date, $siteID, $installID)
     {
-        $elec_contract = DataLine::where('site_id', $siteID)->where('contract_type', 2)->first();
+        $elec_contract = DataLine::where('installation_id', $installID)->where('contract_type', 2)->first();
         $elec_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $elec_contract->chp_contract_id)->where('reading_date', $date)->first();
-        $gas_contract = DataLine::where('site_id', $siteID)->where('contract_type', 3)->first();
+        $gas_contract = DataLine::where('installation_id', $installID)->where('contract_type', 3)->first();
         $gas_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $gas_contract->chp_contract_id)->where('reading_date', $date)->first();
-        $therm_contract = DataLine::where('site_id', $siteID)->where('contract_type', 1)->first();
+        $therm_contract = DataLine::where('installation_id', $installID)->where('contract_type', 1)->first();
         $therm_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $therm_contract->chp_contract_id)->where('reading_date', $date)->first();
         if ($elec_reading):
             TwoGApi::append2GReading(1, $elec_reading, $data, $siteID);

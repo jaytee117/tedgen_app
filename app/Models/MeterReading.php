@@ -34,4 +34,15 @@ class MeterReading extends Model
         1 => 'No Gas Recorded',
         2 => 'Low Gas Consumption'
     ];
+
+    public static function hhTimeArray() {
+        $time = "00:00";
+        $tNow = strtotime($time);
+        for ($x = 0; $x < 48; $x++):
+            $time_matrix[$x] = $time;
+            $tNow = strtotime('+30 minutes', $tNow);
+            $time = date( "H:i",$tNow);
+        endfor;
+        return $time_matrix;
+    }
 }

@@ -142,7 +142,7 @@ class TwoGApi
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
         foreach ($data as $line):
-            Log::info($line);
+            Log::info(print_r($line, true));
             $key = array_search($line->time, $timeArray);
             if (false !== $key):
                 switch ($type) {

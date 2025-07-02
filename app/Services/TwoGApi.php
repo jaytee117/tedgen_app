@@ -76,11 +76,11 @@ class TwoGApi
     public static function parse2GReadings($data, $date, $siteID)
     {
         $elec_contract = DataLine::where('site_id', $siteID)->where('contract_type', 2)->first();
-        $elec_reading = DataLine::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $elec_contract->chp_contract_id)->where('reading_date', $date)->first();
+        $elec_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $elec_contract->chp_contract_id)->where('reading_date', $date)->first();
         $gas_contract = DataLine::where('site_id', $siteID)->where('contract_type', 3)->first();
-        $gas_reading = DataLine::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $gas_contract->chp_contract_id)->where('reading_date', $date)->first();
+        $gas_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $gas_contract->chp_contract_id)->where('reading_date', $date)->first();
         $therm_contract = DataLine::where('site_id', $siteID)->where('contract_type', 1)->first();
-        $therm_reading = DataLine::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $therm_contract->chp_contract_id)->where('reading_date', $date)->first();
+        $therm_reading = MeterReading::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $therm_contract->chp_contract_id)->where('reading_date', $date)->first();
         if ($elec_reading):
             TwoGApi::append2GReading(1, $elec_reading, $data, $siteID);
         else:

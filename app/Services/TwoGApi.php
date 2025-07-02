@@ -167,14 +167,14 @@ class TwoGApi
                 }
             endif;
         endforeach;
-        $elec_reading = new MeterReading();
-        $elec_reading->site_id = $siteID;
-        $elec_reading->contract_id = $contract->chp_contract_id;
-        $elec_reading->reading_type = 2;
-        $elec_reading->reading_date = $date;
-        $elec_reading->meter_reference = $contract->meter_reference;
-        $elec_reading->total = array_sum($hh);
-        $elec_reading->hh_data = json_encode($hh);
-        $elec_reading->save();
+        $reading = new MeterReading();
+        $reading->site_id = $siteID;
+        $reading->contract_id = $contract->chp_contract_id;
+        $reading->reading_type = 2;
+        $reading->reading_date = $date;
+        $reading->meter_reference = $contract->meter_reference;
+        $reading->total = array_sum($hh);
+        $reading->hh_data = json_encode($hh);
+        $reading->save();
     }
 }

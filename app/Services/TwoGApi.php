@@ -68,14 +68,15 @@ class TwoGApi
             Log::info($data);
             if (count($data)):
                 Log::info('>>> ' . $install->asset_id . ' has sent readings.');
-            //TwoGHelper::parse2GReadings($result['data'], $result['date'], $siteID);
+                TwoGApi::parse2GReadings($result['data'], $result['date'], $install->site_id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
             endif;
         }
     }
 
-    public static function parse2GReadings($data, $date, $siteID) {
+    public static function parse2GReadings($data, $date, $siteID)
+    {
         $elec_contract = DataLine::where('site_id', $siteID)->where('contract_type', 2)->first();
         $elec_reading = DataLine::where('reading_type', 2)->where('site_id', $siteID)->where('contract_id', $elec_contract->chp_contract_id)->where('reading_date', $date)->first();
         $gas_contract = DataLine::where('site_id', $siteID)->where('contract_type', 3)->first();
@@ -99,7 +100,8 @@ class TwoGApi
         endif;
     }
 
-    public static function append2GReading($type, $crm_reading, $data, $siteID) {
+    public static function append2GReading($type, $crm_reading, $data, $siteID)
+    {
         $timeArray = MeterReading::hhTimeArray();
         $hh = json_decode($crm_reading->hh_data);
         $key = array_search($data[0]->time, $timeArray);
@@ -127,7 +129,7 @@ class TwoGApi
         }
         if ($data[0]->state == 'fault'):
             $crm_reading->online_status = 3;
-            $crm_reading->online = 0;            
+            $crm_reading->online = 0;
         else:
             $crm_reading->online_status = 0;
             $crm_reading->online = 1;
@@ -135,10 +137,10 @@ class TwoGApi
         $crm_reading->total = array_sum($hh);
         $crm_reading->hh_data = json_encode($hh);
         $crm_reading->save();
-
     }
 
-    public static function new2GReading($type, $data, $contract, $siteID, $date) {
+    public static function new2GReading($type, $data, $contract, $siteID, $date)
+    {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
         foreach ($data as $line):

@@ -200,7 +200,7 @@ class TwoGApi
         $reading->dataline_id = $dataline->id;
         $reading->reading_type = 2;
         $reading->reading_date = $date;
-        $reading->meter_reference = $dataline->meter_reference;
+        $reading->meter_reference = $dataline->line_reference;
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
         if ($data[0]->state == 'fault'):

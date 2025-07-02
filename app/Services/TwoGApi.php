@@ -66,7 +66,7 @@ class TwoGApi
             $data = $decoded->data;
             if (count($data)):
                 Log::info('>>> ' . $install->asset_id . ' has sent readings.');
-                TwoGApi::parse2GReadings($result['data'], $result['date'], $install->site_id);
+                TwoGApi::parse2GReadings($data, $date, $install->site_id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
             endif;

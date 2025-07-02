@@ -101,7 +101,7 @@ class TwoGApi
     public static function append2GReading($type, $crm_reading, $data, $siteID)
     {
         $timeArray = MeterReading::hhTimeArray();
-        $hh = json_decode($crm_reading->hh_data);
+        $hh = $crm_reading->hh_data;
         $key = array_search($data[0]->time, $timeArray);
         $message = false;
         switch ($type) {

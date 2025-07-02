@@ -90,6 +90,7 @@ class TwoGApi
 
             if (count($data)):
                 Log::info('>>> ' . $install->asset_id . ' has sent readings.');
+                Log::info(print_r($results, true));
                 TwoGApi::parse2GReadings($results, $date, $install->site_id, $install->id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
@@ -167,8 +168,7 @@ class TwoGApi
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
-        foreach ($data as $line):
-            Log::info(print_r($line, true));
+        foreach ($data as $line):            
             $key = array_search($line->time, $timeArray);
             if (false !== $key):
                 switch ($type) {

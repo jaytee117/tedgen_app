@@ -63,6 +63,12 @@ class TwoGApi
             $data = $decoded->data;
             $results = [];
             Log::info($decoded);
+            if (count($data)):
+                Log::info('>>> ' . $install->asset_id . ' has sent readings.');
+            //TwoGHelper::parse2GReadings($result['data'], $result['date'], $siteID);
+            else:
+                Log::info('No Data for this period recorded for ' . $install->asset_id);
+            endif;
         }
     }
 }

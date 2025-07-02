@@ -35,5 +35,6 @@ class Get2GReportsCommand extends Command
         $date = $givenDt->format('Y-m-d');
         Log::info('Running 2G API Job for ' . $hour . ':00 UTC');
         $result = TwoGApi::getReadings($date, $hour);
+        
     }
 }

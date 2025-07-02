@@ -66,20 +66,20 @@ class TwoGApi
                 $datetime = new \DateTime($line->reportDateTime);
                 $date = $datetime->format('Y-m-d');
                 $time = $datetime->format('H:00');
-                $minute = $datetime->format('i');
-                if ($minute < 2):
-                    $single = new \stdClass();
-                    $single->date = $date;
-                    $single->time = $time;
-                    $single->ElecReading = $line->counterPowerProduced;
-                    $single->HeatReading = $line->counterHeatQuantityPlantHeatCircuit;
-                    $single->GasReading = $line->counterConsumptionGasType1;
-                    $single->activeGas = $line->consumptionGasType1;
-                    $single->activePower = $line->activePower;
-                    $single->state = $line->state;
-                    $single->reportId = $line->reportId;
-                    $api_results[] = $single;
-                endif;
+                //$minute = $datetime->format('i');
+                ///if ($minute < 2):
+                $single = new \stdClass();
+                $single->date = $date;
+                $single->time = $time;
+                $single->ElecReading = $line->counterPowerProduced;
+                $single->HeatReading = $line->counterHeatQuantityPlantHeatCircuit;
+                $single->GasReading = $line->counterConsumptionGasType1;
+                $single->activeGas = $line->consumptionGasType1;
+                $single->activePower = $line->activePower;
+                $single->state = $line->state;
+                $single->reportId = $line->reportId;
+                $api_results[] = $single;
+            //endif;
             endforeach;
             if (count($data)):
                 Log::info($install->asset_id . ' has sent readings.');

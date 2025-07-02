@@ -203,6 +203,13 @@ class TwoGApi
         $reading->meter_reference = $dataline->meter_reference;
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
+        if ($data[0]->state == 'fault'):
+            $reading->online_status = 3;
+            $reading->online = 0;
+        else:
+            $reading->online_status = 0;
+            $reading->online = 1;
+        endif;
         $reading->save();
     }
 }

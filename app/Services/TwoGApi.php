@@ -64,8 +64,6 @@ class TwoGApi
             $result = curl_exec($ch);
             $decoded = json_decode($result);
             $data = $decoded->data;
-            $results = [];
-            Log::info($data);
             if (count($data)):
                 Log::info('>>> ' . $install->asset_id . ' has sent readings.');
                 TwoGApi::parse2GReadings($result['data'], $result['date'], $install->site_id);

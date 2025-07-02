@@ -62,7 +62,7 @@ class TwoGApi
             $decoded = json_decode($result);
             $data = $decoded->data;
             $results = [];
-            Log::info($data);
+            Log::info($decoded);
         }
     }
 }

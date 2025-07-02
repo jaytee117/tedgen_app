@@ -31,7 +31,6 @@ class InstallationAction
     {
 
         for ($x = 1; $x <= 3; $x++) {
-
             DataLine::create([
                 'installation_id' => $installation->id,
                 'data_line_type' => $x,

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('meter_reading', function (Blueprint $table) {
             $table->id();
             $table->integer('site_id')->nullable();
+            $table->integer('installation_id')->nullable();
             $table->integer('contract_id')->nullable();
             $table->timestamp('reading_date');
             $table->integer('reading_type');

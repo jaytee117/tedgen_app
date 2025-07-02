@@ -16,6 +16,7 @@ class MeterReading extends Model
         'unit',
         'contract_id',
         'site_id',
+        'installation_id',
         'op_count',
         'online',
         'online_status',

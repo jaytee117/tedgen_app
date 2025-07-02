@@ -194,6 +194,7 @@ class TwoGApi
         endforeach;
         $reading = new MeterReading();
         $reading->site_id = $siteID;
+        $reading->installation_id = $installID;
         $reading->contract_id = $contract->chp_contract_id;
         $reading->reading_type = 2;
         $reading->reading_date = $date;

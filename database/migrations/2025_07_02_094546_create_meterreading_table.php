@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meterreading', function (Blueprint $table) {
+        Schema::create('meter_reading', function (Blueprint $table) {
             $table->id();
             $table->integer('site_id')->nullable();
             $table->integer('contract_id')->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meterreading');
+        Schema::dropIfExists('meter_reading');
     }
 };

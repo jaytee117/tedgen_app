@@ -35,6 +35,7 @@ class InstallationController extends Controller
         $validated = InstallationAction::storeNewRates($valid);
         $installation = Installation::create($validated);
         InstallationAction::createDataLines($installation);
+        InstallationAction::createLastCounts($installation);
         return redirect()->route('installation.show', ['installation' => $installation])->with('success', 'Installation Created!');
     }
 

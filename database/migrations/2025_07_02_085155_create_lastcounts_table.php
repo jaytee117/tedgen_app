@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lastcounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('site_id');
+            $table->integer('installation_id');
             $table->integer('type');
             $table->decimal('last_reading', 20, 4);
             $table->timestamps();

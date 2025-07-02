@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\DataLine;
 use App\Models\Installation;
+use App\Models\LastCount;
 
 class InstallationAction
 {
@@ -35,6 +36,18 @@ class InstallationAction
                 'installation_id' => $installation->id,
                 'data_line_type' => $x,
                 'line_reference' => Dataline::$_data_line_type[$x]
+            ]);
+        }
+        return;
+    }
+
+    public static function createLastCounts(Installation $installation)
+    {
+        for ($x = 1; $x <= 3; $x++) {
+            LastCount::create([
+                'installation_id' => $installation->id,
+                'type' => $x,
+                'last_reading' => 0
             ]);
         }
         return;

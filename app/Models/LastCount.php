@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LastCount extends Model
 {
     protected $fillable = [
-        'site_id', 
+        'installation_id', 
         'type',
         'last_reading', 
     ];

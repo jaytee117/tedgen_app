@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lastcounts', function (Blueprint $table) {
+        Schema::create('last_counts', function (Blueprint $table) {
             $table->id();
             $table->integer('installation_id');
             $table->integer('type');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lastcounts');
+        Schema::dropIfExists('last_counts');
     }
 };

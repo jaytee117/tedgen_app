@@ -29,10 +29,6 @@ return new class extends Migration
         });
     }
 
-    protected $casts = [
-        'hh_data' => 'array'
-    ];
-
     /**
      * Reverse the migrations.
      */

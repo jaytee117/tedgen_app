@@ -17,11 +17,7 @@ class TwoGApi
         $now = time();
         $credentials = Credentials::where('provider', 1)->first();
         $expires = $credentials->expires;
-        if ($expires > $now):
-            Log::info('expires = ' . $credentials->expires);
-            Log::info('now = ' . $now);
-            Log::info('2g token still valid');
-        else:
+        if ($expires <= $now):
             $client_id = Config::get('services.2gapi.client_id');
             $client_secret = Config::get('services.2gapi.client_secret');
             $ch = curl_init();
@@ -65,7 +61,7 @@ class TwoGApi
             $decoded = json_decode($result);
             $data = $decoded->data;
             Log::info(print_r($decoded, true));
-            $results = [];
+            $api_results = [];
             foreach ($data as $line):
                 $datetime = new \DateTime($line->reportDateTime);
                 $date = $datetime->format('Y-m-d');
@@ -82,22 +78,19 @@ class TwoGApi
                     $single->activePower = $line->activePower;
                     $single->state = $line->state;
                     $single->reportId = $line->reportId;
-                    $results[] = $single;
+                    $api_results[] = $single;
                 endif;
             endforeach;
-
-
-
             if (count($data)):
                 Log::info($install->asset_id . ' has sent readings.');
-                TwoGApi::parse2GReadings($results, $date, $install->site_id, $install->id);
+                TwoGApi::parse2GReadings($api_results, $date, $install->site_id, $install->id);
             else:
                 Log::info('No Data for this period recorded for ' . $install->asset_id);
             endif;
         }
     }
 
-    public static function parse2GReadings($data, $date, $siteID, $installID)
+    public static function parse2GReadings($api_results, $date, $siteID, $installID)
     {
         $elec_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 2)->first();
         $elec_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $elec_dataline->id)->where('reading_date', $date)->first();
@@ -106,66 +99,66 @@ class TwoGApi
         $therm_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 1)->first();
         $therm_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $therm_dataline->id)->where('reading_date', $date)->first();
         if ($elec_reading):
-            TwoGApi::append2GReading(1, $elec_reading, $data, $siteID, $installID);
+            TwoGApi::append2GReading(1, $elec_reading, $api_results, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(1, $data, $elec_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(1, $api_results, $elec_dataline, $siteID, $date, $installID);
         endif;
         if ($gas_reading):
-            TwoGApi::append2GReading(2, $gas_reading, $data, $siteID, $installID);
+            TwoGApi::append2GReading(2, $gas_reading, $api_results, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(2, $data, $gas_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(2, $api_results, $gas_dataline, $siteID, $date, $installID);
         endif;
         if ($therm_reading):
-            TwoGApi::append2GReading(3, $therm_reading, $data, $siteID, $installID);
+            TwoGApi::append2GReading(3, $therm_reading, $api_results, $siteID, $installID);
         else:
-            TwoGApi::new2GReading(3, $data, $therm_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(3, $api_results, $therm_dataline, $siteID, $date, $installID);
         endif;
     }
 
-    public static function append2GReading($type, $crm_reading, $data, $siteID, $installID)
+    public static function append2GReading($type, $reading, $api_results, $siteID, $installID)
     {
         $timeArray = MeterReading::hhTimeArray();
-        $hh = json_decode($crm_reading->hh_data);
-        $key = array_search($data[0]->time, $timeArray);
-        $message = false;
+        $hh = json_decode($reading->hh_data);
+        $key = array_search($api_results[0]->time, $timeArray);
+        //last reading
         switch ($type) {
             case 1:
                 $lastElec = LastCount::where('installation_id', $installID)->where('type', 2)->first();
-                $hh[$key] = ($data[0]->ElecReading - $lastElec->last_reading);
-                $lastElec->last_reading = $data[0]->ElecReading;
+                $hh[$key] = ($api_results[0]->ElecReading - $lastElec->last_reading);
+                $lastElec->last_reading = $api_results[0]->ElecReading;
                 $lastElec->save();
                 break;
             case 2:
                 $lastGas = LastCount::where('installation_id', $installID)->where('type', 3)->first();
-                $hh[$key] = ($data[0]->GasReading - $lastGas->last_reading);
-                $lastGas->last_reading = $data[0]->GasReading;
+                $hh[$key] = ($api_results[0]->GasReading - $lastGas->last_reading);
+                $lastGas->last_reading = $api_results[0]->GasReading;
                 $lastGas->save();
                 break;
             case 3:
                 $lastHeat = LastCount::where('installation_id', $installID)->where('type', 1)->first();
-                $pulseReading = (($data[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
-                $lastHeat->last_reading = $data[0]->HeatReading;
+                $pulseReading = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
+                $lastHeat->last_reading = $api_results[0]->HeatReading;
                 $lastHeat->save();
                 $hh[$key] = $pulseReading;
                 break;
         }
-        if ($data[0]->state == 'fault'):
-            $crm_reading->online_status = 3;
-            $crm_reading->online = 0;
+        if ($api_results[0]->state == 'fault'):
+            $reading->online_status = 3;
+            $reading->online = 0;
         else:
-            $crm_reading->online_status = 0;
-            $crm_reading->online = 1;
+            $reading->online_status = 0;
+            $reading->online = 1;
         endif;
-        $crm_reading->total = array_sum($hh);
-        $crm_reading->hh_data = json_encode($hh);
-        $crm_reading->save();
+        $reading->total = array_sum($hh);
+        $reading->hh_data = json_encode($hh);
+        $reading->save();
     }
 
-    public static function new2GReading($type, $data, $dataline, $siteID, $date, $installID)
+    public static function new2GReading($type, $api_results, $dataline, $siteID, $date, $installID)
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
-        foreach ($data as $line):
+        foreach ($api_results as $line):
             $key = array_search($line->time, $timeArray);
             if (false !== $key):
                 switch ($type) {
@@ -200,7 +193,7 @@ class TwoGApi
         $reading->meter_reference = $dataline->line_reference;
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
-        if ($data[0]->state == 'fault'):
+        if ($api_results[0]->state == 'fault'):
             $reading->online_status = 3;
             $reading->online = 0;
         else:

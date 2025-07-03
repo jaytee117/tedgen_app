@@ -43,14 +43,14 @@
     </div>
     <div class="row">
         @foreach($installations as $install)
-        <div class="col-xl-6">
+        <div class="col-xl-4">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
                     {{ $install->site['site_name'] }}
                 </div>
                 <div class="card-body">
-                    <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview" height="200px">
+                    <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview" style="height:180px">
                 </div>
             </div>
         </div>

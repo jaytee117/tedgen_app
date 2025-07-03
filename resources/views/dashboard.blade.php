@@ -43,7 +43,7 @@
     </div>
     <div class="row">
         @foreach($installations as $install)
-        <div class="col-xl-4">
+        <div class="col-xl-3">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>

@@ -27,7 +27,7 @@ class Get2GReportsCommand extends Command
      */
     public function handle()
     {
-        TwoGApi::get2GToken();
+        TwoGApi::check2GToken();
         $givenDt = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
         $givenDt->setTimezone(new \DateTimeZone('UTC')); //convert to UTC (will be 1 hour behind GMT during summer months)
         $hour = $givenDt->format('H');

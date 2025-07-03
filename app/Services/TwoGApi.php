@@ -12,7 +12,7 @@ use App\Models\LastCount;
 
 class TwoGApi
 {
-    public static function get2GToken()
+    public static function check2GToken()
     {
         $now = time();
         $credentials = Credentials::where('provider', 1)->first();

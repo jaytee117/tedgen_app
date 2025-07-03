@@ -61,11 +61,11 @@ class TwoGApi
             $decoded = json_decode($result);
             $data = $decoded->data;
             //Log::info(print_r($decoded, true));
-            TwoGApi::createDataFrom2G($data,$install);
+            TwoGApi::createDataFrom2G($data, $install);
         }
     }
 
-    public static function createDataFrom2G($data,$install)
+    public static function createDataFrom2G($data, $install)
     {
         $api_results = [];
         foreach ($data as $line):
@@ -87,40 +87,40 @@ class TwoGApi
             $api_results[] = $single;
         //endif;
         endforeach;
-        if (count($data)):
+        if (count($data) > 0):
             Log::info($install->asset_id . ' has sent readings.');
-            TwoGApi::parse2GReadings($api_results, $date, $install->site_id, $install->id);
+            TwoGApi::parse2GReadings($api_results, $date, $install);
         else:
             Log::info('No Data for this period recorded for ' . $install->asset_id);
         endif;
     }
 
-    public static function parse2GReadings($api_results, $date, $siteID, $installID)
+    public static function parse2GReadings($api_results, $date, $install)
     {
-        $elec_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 2)->first();
+        $elec_dataline = DataLine::where('installation_id', $install->id)->where('data_line_type', 2)->first();
         $elec_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $elec_dataline->id)->where('reading_date', $date)->first();
-        $gas_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 3)->first();
+        $gas_dataline = DataLine::where('installation_id', $install->id)->where('data_line_type', 3)->first();
         $gas_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $gas_dataline->id)->where('reading_date', $date)->first();
-        $therm_dataline = DataLine::where('installation_id', $installID)->where('data_line_type', 1)->first();
+        $therm_dataline = DataLine::where('installation_id', $install->id)->where('data_line_type', 1)->first();
         $therm_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $therm_dataline->id)->where('reading_date', $date)->first();
         if ($elec_reading):
-            TwoGApi::append2GReading(1, $elec_reading, $api_results, $siteID, $installID);
+            TwoGApi::append2GReading(1, $elec_reading, $api_results, $install);
         else:
-            TwoGApi::new2GReading(1, $api_results, $elec_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(1, $api_results, $elec_dataline, $install, $date);
         endif;
         if ($gas_reading):
-            TwoGApi::append2GReading(2, $gas_reading, $api_results, $siteID, $installID);
+            TwoGApi::append2GReading(2, $gas_reading, $api_results, $install);
         else:
-            TwoGApi::new2GReading(2, $api_results, $gas_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(2, $api_results, $gas_dataline, $install, $date, );
         endif;
         if ($therm_reading):
-            TwoGApi::append2GReading(3, $therm_reading, $api_results, $siteID, $installID);
+            TwoGApi::append2GReading(3, $therm_reading, $api_results, $install);
         else:
-            TwoGApi::new2GReading(3, $api_results, $therm_dataline, $siteID, $date, $installID);
+            TwoGApi::new2GReading(3, $api_results, $therm_dataline, $install, $date);
         endif;
     }
 
-    public static function append2GReading($type, $reading, $api_results, $siteID, $installID)
+    public static function append2GReading($type, $reading, $api_results, $install)
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = json_decode($reading->hh_data);
@@ -128,19 +128,19 @@ class TwoGApi
         //last reading
         switch ($type) {
             case 1:
-                $lastElec = LastCount::where('installation_id', $installID)->where('type', 2)->first();
+                $lastElec = LastCount::where('installation_id', $install->id)->where('type', 2)->first();
                 $hh[$key] = ($api_results[0]->ElecReading - $lastElec->last_reading);
                 $lastElec->last_reading = $api_results[0]->ElecReading;
                 $lastElec->save();
                 break;
             case 2:
-                $lastGas = LastCount::where('installation_id', $installID)->where('type', 3)->first();
+                $lastGas = LastCount::where('installation_id', $install->id)->where('type', 3)->first();
                 $hh[$key] = ($api_results[0]->GasReading - $lastGas->last_reading);
                 $lastGas->last_reading = $api_results[0]->GasReading;
                 $lastGas->save();
                 break;
             case 3:
-                $lastHeat = LastCount::where('installation_id', $installID)->where('type', 1)->first();
+                $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
                 $pulseReading = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                 $lastHeat->last_reading = $api_results[0]->HeatReading;
                 $lastHeat->save();
@@ -159,7 +159,7 @@ class TwoGApi
         $reading->save();
     }
 
-    public static function new2GReading($type, $api_results, $dataline, $siteID, $date, $installID)
+    public static function new2GReading($type, $api_results, $dataline, $install, $date)
     {
         $timeArray = MeterReading::hhTimeArray();
         $hh = array_fill(0, 48, 0);
@@ -168,19 +168,19 @@ class TwoGApi
             if (false !== $key):
                 switch ($type) {
                     case 1:
-                        $lastElec = LastCount::where('installation_id', $installID)->where('type', 2)->first();
+                        $lastElec = LastCount::where('installation_id', $install->id)->where('type', 2)->first();
                         $hh[$key] = $line->ElecReading - $lastElec->last_reading;
                         $lastElec->last_reading = $line->ElecReading;
                         $lastElec->save();
                         break;
                     case 2:
-                        $lastGas = LastCount::where('installation_id', $installID)->where('type', 3)->first();
+                        $lastGas = LastCount::where('installation_id', $install->id)->where('type', 3)->first();
                         $hh[$key] = $line->GasReading - $lastGas->last_reading;
                         $lastGas->last_reading = $line->GasReading;
                         $lastGas->save();
                         break;
                     case 3:
-                        $lastHeat = LastCount::where('installation_id', $installID)->where('type', 1)->first();
+                        $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
                         $pulseReading = (($line->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                         $lastHeat->last_reading = $line->HeatReading;
                         $lastHeat->save();
@@ -190,8 +190,8 @@ class TwoGApi
             endif;
         endforeach;
         $reading = new MeterReading();
-        $reading->site_id = $siteID;
-        $reading->installation_id = $installID;
+        $reading->site_id = $install->site_id;
+        $reading->installation_id = $install->id;
         $reading->dataline_id = $dataline->id;
         $reading->reading_type = 2;
         $reading->reading_date = $date;

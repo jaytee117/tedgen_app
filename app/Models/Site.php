@@ -9,7 +9,21 @@ use App\Models\Installation;
 
 class Site extends Model
 {
-    protected $fillable = ['account_id', 'site_name', 'address_1', 'address_2', 'city', 'region', 'postcode', 'lat', 'lng', 'site_telephone', 'site_img', 'current_temp', 'weather_icon'];
+    protected $fillable = [
+        'account_id', 
+        'site_name', 
+        'address_1', 
+        'address_2', 
+        'city', 
+        'region', 
+        'postcode', 
+        'lat', 
+        'lng', 
+        'site_telephone', 
+        'site_img', 
+        'current_temp', 
+        'weather_icon'
+    ];
 
     public function account()
     {

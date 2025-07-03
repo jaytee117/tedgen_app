@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Credentials extends Model
 {
-    protected $fillable = ['provider', 'access_token', 'expires'];
+    protected $fillable = [
+        'provider', 
+        'access_token', 
+        'expires'
+    ];
 
     public static $_provider = [
         0 => 'NONE',

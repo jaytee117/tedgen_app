@@ -50,7 +50,7 @@
                     {{ $install->site['site_name'] }}
                 </div>
                 <div class="card-body">
-                    <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview" >
+                    <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview" style="height:250px">
                 </div>
             </div>
         </div>

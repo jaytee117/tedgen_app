@@ -41,7 +41,7 @@ class TwoGApi
         endif;
     }
 
-    public static function getReadings($date, $hour)
+    public static function getReadingsFromApi($date, $hour)
     {
         $credentials = Credentials::where('provider', 1)->first();
         $request_headers = [
@@ -60,34 +60,39 @@ class TwoGApi
             $result = curl_exec($ch);
             $decoded = json_decode($result);
             $data = $decoded->data;
-            Log::info(print_r($decoded, true));
-            $api_results = [];
-            foreach ($data as $line):
-                $datetime = new \DateTime($line->reportDateTime);
-                $date = $datetime->format('Y-m-d');
-                $time = $datetime->format('H:00');
-                //$minute = $datetime->format('i');
-                ///if ($minute < 2):
-                $single = new \stdClass();
-                $single->date = $date;
-                $single->time = $time;
-                $single->ElecReading = $line->counterPowerProduced;
-                $single->HeatReading = $line->counterHeatQuantityPlantHeatCircuit;
-                $single->GasReading = $line->counterConsumptionGasType1;
-                $single->activeGas = $line->consumptionGasType1;
-                $single->activePower = $line->activePower;
-                $single->state = $line->state;
-                $single->reportId = $line->reportId;
-                $api_results[] = $single;
-            //endif;
-            endforeach;
-            if (count($data)):
-                Log::info($install->asset_id . ' has sent readings.');
-                TwoGApi::parse2GReadings($api_results, $date, $install->site_id, $install->id);
-            else:
-                Log::info('No Data for this period recorded for ' . $install->asset_id);
-            endif;
+            //Log::info(print_r($decoded, true));
+            TwoGApi::createDataFrom2G($data,$install);
         }
+    }
+
+    public static function createDataFrom2G($data,$install)
+    {
+        $api_results = [];
+        foreach ($data as $line):
+            $datetime = new \DateTime($line->reportDateTime);
+            $date = $datetime->format('Y-m-d');
+            $time = $datetime->format('H:00');
+            //$minute = $datetime->format('i');
+            ///if ($minute < 2):
+            $single = new \stdClass();
+            $single->date = $date;
+            $single->time = $time;
+            $single->ElecReading = $line->counterPowerProduced;
+            $single->HeatReading = $line->counterHeatQuantityPlantHeatCircuit;
+            $single->GasReading = $line->counterConsumptionGasType1;
+            $single->activeGas = $line->consumptionGasType1;
+            $single->activePower = $line->activePower;
+            $single->state = $line->state;
+            $single->reportId = $line->reportId;
+            $api_results[] = $single;
+        //endif;
+        endforeach;
+        if (count($data)):
+            Log::info($install->asset_id . ' has sent readings.');
+            TwoGApi::parse2GReadings($api_results, $date, $install->site_id, $install->id);
+        else:
+            Log::info('No Data for this period recorded for ' . $install->asset_id);
+        endif;
     }
 
     public static function parse2GReadings($api_results, $date, $siteID, $installID)

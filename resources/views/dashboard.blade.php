@@ -50,7 +50,7 @@
                     {{ $install->id }}
                 </div>
                 <div class="card-body">
-                    <img src="{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview">
+                    <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview">
                 </div>
             </div>
         </div>

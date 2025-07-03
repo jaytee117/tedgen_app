@@ -49,7 +49,9 @@
                     <i class="fas fa-chart-area me-1"></i>
                     {{ $install->id }}
                 </div>
-                <div class="card-body"></div>
+                <div class="card-body">
+                    <img src="{{ $install->site['site_img'] }}" alt="Uploaded File" id="preview">
+                </div>
             </div>
         </div>
         @endforeach

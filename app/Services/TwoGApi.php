@@ -58,16 +58,17 @@ class TwoGApi
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
             $result = curl_exec($ch);
-            $decoded = json_decode($result);
-            $data = $decoded->data;
-            //Log::info(print_r($decoded, true));
-            TwoGApi::createDataFrom2G($data, $install);
+            $curlResult = json_decode($result);
+            
+            
+            TwoGApi::createDataFrom2G($curlResult, $install);
         }
     }
 
-    public static function createDataFrom2G($data, $install)
+    public static function createDataFrom2G($curlResult, $install)
     {
         $api_results = [];
+        $data = $curlResult->data;
         foreach ($data as $line):
             $datetime = new \DateTime($line->reportDateTime);
             $date = $datetime->format('Y-m-d');
@@ -92,6 +93,7 @@ class TwoGApi
             TwoGApi::parse2GReadings($api_results, $date, $install);
         else:
             Log::info('No Data for this period recorded for ' . $install->asset_id);
+            Log::info(print_r($decoded, true));
         endif;
     }
 

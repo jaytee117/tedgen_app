@@ -58,9 +58,7 @@ class TwoGApi
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
             $result = curl_exec($ch);
-            $curlResult = json_decode($result);
-            
-            
+            $curlResult = json_decode($result);                        
             TwoGApi::createDataFrom2G($curlResult, $install);
         }
     }

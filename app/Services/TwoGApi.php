@@ -143,7 +143,7 @@ class TwoGApi
                 $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
                 $hh[$key] = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                 $lastHeat->last_reading = $api_results[0]->HeatReading;
-                $lastHeat->save();                
+                $lastHeat->save();                                
                 break;
         }
         if ($api_results[0]->state == 'fault'):

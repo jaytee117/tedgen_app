@@ -47,7 +47,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                    {{ $install->site['site_name'] }}
+                  {{ $install->asset_id }}  {{ $install->site['site_name'] }}
                 </div>
                 <div class="card-body">
                     <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" class="img-responsive">

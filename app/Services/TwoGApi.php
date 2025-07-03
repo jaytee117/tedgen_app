@@ -141,10 +141,9 @@ class TwoGApi
                 break;
             case 3:
                 $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
-                $pulseReading = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
+                $hh[$key] = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                 $lastHeat->last_reading = $api_results[0]->HeatReading;
-                $lastHeat->save();
-                $hh[$key] = $pulseReading;
+                $lastHeat->save();                
                 break;
         }
         if ($api_results[0]->state == 'fault'):
@@ -180,11 +179,10 @@ class TwoGApi
                         $lastGas->save();
                         break;
                     case 3:
-                        $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
-                        $pulseReading = (($line->HeatReading - $lastHeat->last_reading) * 70) / 100000;
+                        $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();                        
+                        $hh[$key] = (($line->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                         $lastHeat->last_reading = $line->HeatReading;
-                        $lastHeat->save();
-                        $hh[$key] = $pulseReading;
+                        $lastHeat->save();                        
                         break;
                 }
             endif;

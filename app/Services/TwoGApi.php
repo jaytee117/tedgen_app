@@ -93,7 +93,7 @@ class TwoGApi
             TwoGApi::parse2GReadings($api_results, $date, $install);
         else:
             Log::info('No Data for this period recorded for ' . $install->asset_id);
-            Log::info(print_r($decoded, true));
+            Log::info(print_r($curlResult, true));
         endif;
     }
 

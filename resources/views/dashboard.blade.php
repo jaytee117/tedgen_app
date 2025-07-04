@@ -50,7 +50,7 @@
                   {{ $install->asset_id }}-{{ $install->site['site_name'] }}
                 </div>
                 <div class="card-body">
-                    <div style="position: absolute; top: 50px; right: 10px;"><img src="https://openweathermap.org/img/wn/{{ $install->site['weather_icon'] }}@2x.png"></div>
+                    <div style="position: absolute; top: 50px; right: 20px;"><img src="https://openweathermap.org/img/wn/{{ $install->site['weather_icon'] }}@2x.png"></div>
                     <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" class="img-responsive">
                 </div>
             </div>

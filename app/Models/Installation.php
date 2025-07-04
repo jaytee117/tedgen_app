@@ -52,8 +52,10 @@ class Installation extends Model
     ];
 
     public static $_machine_status = [
-        0 => 'Inactive',
-        1 => 'Active',
+        0 => 'Running',
+        1 => 'No Gas Recorded',
+        2 => 'Low Gas Consumption',
+        3 => 'Fault State'
     ];
 
     public static $_logger_type = [

@@ -145,16 +145,16 @@ class TwoGApi
                 $lastHeat->save();                                
                 break;
         }
-        if ($api_results[0]->state == 'fault'):
-            $reading->online_status = 3;
-            $reading->online = 0;
-        else:
-            $reading->online_status = 0;
-            $reading->online = 1;
-        endif;
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
         $reading->save();
+        if ($api_results[0]->state == 'fault'):
+            $install->machine_status = 3;
+        else:
+            $install->machine_status = 0;
+        endif;
+        $install->save();
+        
     }
 
     public static function new2GReading($type, $api_results, $dataline, $install, $date)

@@ -28,14 +28,7 @@ class MeterReading extends Model
         1 => 'MOP',
         2 => 'CHP',
         3 => 'HH'
-    ];
-    
-    public static $_online_status = [
-        0 => 'Running',
-        1 => 'No Gas Recorded',
-        2 => 'Low Gas Consumption',
-        3 => 'Fault State'
-    ];
+    ];        
 
     public static function hhTimeArray() {
         $time = "00:00";

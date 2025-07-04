@@ -17,19 +17,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <p>Gas Consumed</p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="h99 pull-right"> kW</div>
-                        </div>
+<div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">Gas Consumed</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i> 99 Kw</div>
+                </div>
+
+
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p>Electricity Generated</p>
                         </div>
                         <div class="col-md-6">
-                            <div class="h99 pull-right">kW</div>
+                            <div class="h99 pull-right">99 kW</div>
                         </div>
                     </div>
                     <div class="row">
@@ -37,7 +38,7 @@
                             <p>Heat Generated</p>
                         </div>
                         <div class="col-md-6">
-                            <div class="h99 pull-right"> kWth</div>
+                            <div class="h99 pull-right">99 kWth</div>
                         </div>
                     </div>
                 </div>

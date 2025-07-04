@@ -5,11 +5,9 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 mt-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="h2" style="font-size:24px;font-weight:100;">
-                            Today
-                        </div>
+                <div class="card-header">
+                    <div class="h2" style="font-size:24px;font-weight:100;">
+                        Today
                     </div>
                 </div>
                 <div class="row">
@@ -30,12 +28,12 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 mt-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="h2" style="font-size:24px;font-weight:100;">
-                            Yesterday
-                        </div>
+                <div class="card-header">
+
+                    <div class="h2" style="font-size:24px;font-weight:100;">
+                        Yesterday
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -55,12 +53,12 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 mt-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="h2" style="font-size:24px;font-weight:100;">
-                            Month To Date
-                        </div>
+                <div class="card-header">
+
+                    <div class="h2" style="font-size:24px;font-weight:100;">
+                        Month To Date
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -80,12 +78,12 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card mb-4 mt-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="h2" style="font-size:24px;font-weight:100;">
-                            Year To Date
-                        </div>
+                <div class="card-header">
+
+                    <div class="h2" style="font-size:24px;font-weight:100;">
+                        Year To Date
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="card-footer d-flex align-items-center justify-content-between">

@@ -55,7 +55,8 @@ class Installation extends Model
         0 => 'Running',
         1 => 'No Gas Recorded',
         2 => 'Low Gas Consumption',
-        3 => 'Fault State'
+        3 => 'Fault State',
+        4 => 'Offline'
     ];
 
     public static $_logger_type = [

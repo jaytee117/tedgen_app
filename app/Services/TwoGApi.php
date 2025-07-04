@@ -50,7 +50,7 @@ class TwoGApi
         $installs = Installation::where('logger_type', 4)->whereNotNull('ip_address')->get();
         foreach ($installs as $install) {
             //ip address is actually asset_id from 2g
-            $url = 'https://api.2-g.energy/idc/v3/assets/chp/' . $install->ip_address . '/reports?filter=reportDateTime%20gt%20%22' . $date . 'T' . $hour . ':00%22%20AND%20reportDateTime%20lt%20%22' . $date . 'T' . $hour . ':59%22%20&take=1&skip=0';
+            $url = 'https://api.2-g.energy/idc/v2/assets/chp/' . $install->ip_address . '/reports?filter=reportDateTime%20gt%20%22' . $date . 'T' . $hour . ':00%22%20AND%20reportDateTime%20lt%20%22' . $date . 'T' . $hour . ':59%22%20&take=1&skip=0';
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");

@@ -47,7 +47,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                  {{ $install->asset_id }}-{{ $install->site['site_name'] }} <div style="position: absolute; top: 50px; right: 20px;"><img src="https://openweathermap.org/img/wn/{{ $install->site['weather_icon'] }}.png"></div>
+                  {{ $install->asset_id }}-{{ $install->site['site_name'] }} <div style="position: absolute; top: 60px; right: 30px;"><img src="https://openweathermap.org/img/wn/{{ $install->site['weather_icon'] }}.png"></div>
                 </div>
                 <div class="card-body">
                     

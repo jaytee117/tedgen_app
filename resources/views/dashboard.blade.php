@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <div class="row">
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4 mt-4">
+            <div class="card mb-4 mt-4">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="h2" style="font-size:24px;font-weight:100;">

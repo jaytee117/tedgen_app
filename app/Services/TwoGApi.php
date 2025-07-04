@@ -194,14 +194,13 @@ class TwoGApi
         $reading->reading_date = $date;
         $reading->meter_reference = $dataline->line_reference;
         $reading->total = array_sum($hh);
-        $reading->hh_data = json_encode($hh);
-        if ($api_results[0]->state == 'fault'):
-            $reading->online_status = 3;
-            $reading->online = 0;
-        else:
-            $reading->online_status = 0;
-            $reading->online = 1;
-        endif;
+        $reading->hh_data = json_encode($hh);        
         $reading->save();
+         if ($api_results[0]->state == 'fault'):
+            $install->machine_status = 3;
+        else:
+            $install->machine_status = 0;
+        endif;
+        $install->save();
     }
 }

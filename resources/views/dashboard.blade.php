@@ -46,8 +46,8 @@
         <div class="col-xl-3">
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-signal me1"></i>{{ App\Models\Installation::$_machine_status[$install->machine_status] }}
-                    {{ $install->asset_id }}-{{ $install->site['site_name'] }} <div
+                    <i class="fas fa-signal me1"></i>
+                    {{ $install->asset_id }}-{{ $install->site['site_name'] }} - {{ App\Models\Installation::$_machine_status[$install->machine_status] }}<div
                         style="position: absolute; top: 60px; right: 30px;"><img
                             src="https://openweathermap.org/img/wn/{{ $install->site['weather_icon'] }}.png"></div>
                 </div>

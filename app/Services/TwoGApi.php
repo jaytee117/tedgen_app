@@ -60,7 +60,7 @@ class TwoGApi
             $result = curl_exec($ch);
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $curlResult = json_decode($result);
-            curl_close($ch);                       
+            curl_close($ch);
             TwoGApi::createDataFrom2G($curlResult, $install, $status);
         }
     }
@@ -91,11 +91,19 @@ class TwoGApi
         else:
             Log::info('No Data for this period recorded for ' . $install->asset_id);
             Log::info('Status Code:'  . $status);
+            $install->machine_status = 4;
+            $install->save();
         endif;
     }
 
     public static function parse2GReadings($api_results, $date, $install)
     {
+        if ($api_results[0]->state == 'fault'):
+            $install->machine_status = 3;
+        else:
+            $install->machine_status = 0;
+        endif;
+        $install->save();
         $elec_dataline = DataLine::where('installation_id', $install->id)->where('data_line_type', 2)->first();
         $elec_reading = MeterReading::where('reading_type', 2)->where('dataline_id', $elec_dataline->id)->where('reading_date', $date)->first();
         $gas_dataline = DataLine::where('installation_id', $install->id)->where('data_line_type', 3)->first();
@@ -110,7 +118,7 @@ class TwoGApi
         if ($gas_reading):
             TwoGApi::append2GReading(2, $gas_reading, $api_results, $install);
         else:
-            TwoGApi::new2GReading(2, $api_results, $gas_dataline, $install, $date, );
+            TwoGApi::new2GReading(2, $api_results, $gas_dataline, $install, $date,);
         endif;
         if ($therm_reading):
             TwoGApi::append2GReading(3, $therm_reading, $api_results, $install);
@@ -142,19 +150,12 @@ class TwoGApi
                 $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
                 $hh[$key] = (($api_results[0]->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                 $lastHeat->last_reading = $api_results[0]->HeatReading;
-                $lastHeat->save();                                
+                $lastHeat->save();
                 break;
         }
         $reading->total = array_sum($hh);
         $reading->hh_data = json_encode($hh);
         $reading->save();
-        if ($api_results[0]->state == 'fault'):
-            $install->machine_status = 3;
-        else:
-            $install->machine_status = 0;
-        endif;
-        $install->save();
-        
     }
 
     public static function new2GReading($type, $api_results, $dataline, $install, $date)
@@ -178,10 +179,10 @@ class TwoGApi
                         $lastGas->save();
                         break;
                     case 3:
-                        $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();                        
+                        $lastHeat = LastCount::where('installation_id', $install->id)->where('type', 1)->first();
                         $hh[$key] = (($line->HeatReading - $lastHeat->last_reading) * 70) / 100000;
                         $lastHeat->last_reading = $line->HeatReading;
-                        $lastHeat->save();                        
+                        $lastHeat->save();
                         break;
                 }
             endif;
@@ -194,13 +195,7 @@ class TwoGApi
         $reading->reading_date = $date;
         $reading->meter_reference = $dataline->line_reference;
         $reading->total = array_sum($hh);
-        $reading->hh_data = json_encode($hh);        
+        $reading->hh_data = json_encode($hh);
         $reading->save();
-         if ($api_results[0]->state == 'fault'):
-            $install->machine_status = 3;
-        else:
-            $install->machine_status = 0;
-        endif;
-        $install->save();
     }
 }

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4 mt-4">
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-12">
                         <div class="h2" style="font-size:24px;font-weight:100;">
                             Today
@@ -25,12 +25,12 @@
                         <div class="small text-white stretched-link">Heat Generated</div>
                         <div class="small text-white"><i class="fas fa-angle-right"></i> 99 Kw</div>
                     </div>
-                </div>                
-            </div>            
+                </div>
+            </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="row">                    
+            <div class="card bg-primary text-white mb-4  mt-4">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="h2" style="font-size:24px;font-weight:100;">
                             Yesterday
@@ -50,12 +50,12 @@
                         <div class="small text-white stretched-link">Heat Generated</div>
                         <div class="small text-white"><i class="fas fa-angle-right"></i> 99 Kw</div>
                     </div>
-                </div>                
-            </div> 
+                </div>
+            </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="row">                    
+            <div class="card bg-primary text-white mb-4 mt-4">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="h2" style="font-size:24px;font-weight:100;">
                             Month To Date
@@ -75,12 +75,12 @@
                         <div class="small text-white stretched-link">Heat Generated</div>
                         <div class="small text-white"><i class="fas fa-angle-right"></i> 99 Kw</div>
                     </div>
-                </div>                
-            </div> 
+                </div>
+            </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="row">                    
+            <div class="card bg-primary text-white mb-4 mt-4">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="h2" style="font-size:24px;font-weight:100;">
                             Year To Date
@@ -100,8 +100,8 @@
                         <div class="small text-white stretched-link">Heat Generated</div>
                         <div class="small text-white"><i class="fas fa-angle-right"></i> 99 Kw</div>
                     </div>
-                </div>                
-            </div> 
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

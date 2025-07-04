@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index(){
 
-        $installations = Installation::with('site')->orderBy('id', 'asc')->paginate(4);
+        $installations = Installation::with('site')->orderBy('id', 'asc')->paginate(8);
         return view('dashboard', ['installations' => $installations]);
     }
 }

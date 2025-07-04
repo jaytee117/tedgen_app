@@ -73,8 +73,6 @@ class TwoGApi
             $datetime = new \DateTime($line->reportDateTime);
             $date = $datetime->format('Y-m-d');
             $time = $datetime->format('H:00');
-            //$minute = $datetime->format('i');
-            ///if ($minute < 2):
             $single = new \stdClass();
             $single->date = $date;
             $single->time = $time;
@@ -86,7 +84,6 @@ class TwoGApi
             $single->state = $line->state;
             $single->reportId = $line->reportId;
             $api_results[] = $single;
-        //endif;
         endforeach;
         if (count($data) > 0):
             Log::info($install->asset_id . ' has sent readings.');

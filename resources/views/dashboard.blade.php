@@ -5,7 +5,7 @@
     <h3 class="mt-4">Dashboard</h3>
     <div class="row">
         <div class="col-xl-3 col-md-6">
-             <div class="card card-price cardblue">
+             <div class="card bg-primary text-white mb-4">
                     <div class="row">
                         <div class="col-md-4">
                             <img src="" style="width: 100px;margin: 0 auto;">

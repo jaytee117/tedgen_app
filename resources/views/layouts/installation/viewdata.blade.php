@@ -60,7 +60,6 @@
                 ChpDash.chart = Highcharts.chart('barchart-chp', {
                     title: {
                         text: 'twat'
-                        text: ''
                     },
                     subtitle: {
                         text: ''

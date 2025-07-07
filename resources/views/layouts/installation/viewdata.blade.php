@@ -85,9 +85,11 @@
                     },
                     series: [{
                         name: 'Heat Generated',
+                        type: 'column',
                         data: heat
                     }, {
                         name: 'Electricity Generated',
+                        type: 'column',
                         data: elec
                     }]
                 });

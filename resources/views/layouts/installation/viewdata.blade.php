@@ -59,7 +59,7 @@
                 console.log(xaxis);
                 ChpDash.chart = Highcharts.chart('barchart-chp', {
                     title: {
-                        //text: ChpDash.graphTitle
+                        text: 'twat'
                         text: ''
                     },
                     subtitle: {

@@ -53,10 +53,10 @@
                     gasinput.push(ChpDash.monthly[i][5])
                 }
                 ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
-                document.querySelector('#barchart-chp').innerHTML = '';
+                //document.querySelector('#barchart-chp').innerHTML = '';
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
-                console.log(xaxis);
+                //sconsole.log(xaxis);
                 const chart = Highcharts.chart('barchart-chp', {
                     chart: {
                         type: 'line'

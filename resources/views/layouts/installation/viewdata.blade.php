@@ -254,6 +254,11 @@
             },
         }
 
-        ChpDash.initVue();
+        //ChpDash.initVue();
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ChpDash.initVue();
+    });
+</script>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Actions\InstallationAction;
 use Illuminate\Support\Facades\Log;
+//use Illuminate\Support\Facades\Response;
 
 class InstallationController extends Controller
 {
@@ -108,8 +109,9 @@ class InstallationController extends Controller
         return $validated;
     }
 
-    public function getinfo(Request $request, Installation $installation){
+    public function getinfo( Installation $installation){
         $installation->load('readings');
         Log::info(print_r($installation->toArray(), true));
+        return Response()->json($installation);
     }
 }

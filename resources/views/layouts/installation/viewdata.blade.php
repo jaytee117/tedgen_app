@@ -19,11 +19,8 @@
                                 },
                                 type: 'post',
                                 url: "{{ route('installation.getinfo', $installation) }}",
-                                data: [],
-                                contentType: false,
-                                processData: false,
                                 success: (response) => {
-                                    alert('success');
+                                    console.log(response);
                                 },
                                 error: function(response) {
                                     $.each(response.responseJSON.errors, function(key,

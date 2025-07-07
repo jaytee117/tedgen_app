@@ -109,7 +109,7 @@ class InstallationController extends Controller
     }
 
     public function getinfo(Request $request){
-        Log::info('TWAT');
+        Log::info(print_r($request, true));
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Models\DataLine;
 use App\Models\Installation;
 use App\Models\LastCount;
+use App\Models\MeterReading;
 
 class InstallationAction
 {
@@ -51,5 +52,71 @@ class InstallationAction
             ]);
         }
         return;
+    }
+
+     public static function getYearsReadings($installation_id) {
+        $newdate = date("Y-m-d", strtotime("-11 months"));
+        $results = [];
+        $rates = Installation::where('installation_id', $installation_id)->first();
+
+        $heatingContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 1)->where('supply_status', 3)->first();
+        $elecContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 2)->where('supply_status', 3)->first();
+        $gasContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 3)->where('supply_status', 3)->first();
+
+        if ($heatingContract && $elecContract && $gasContract):
+            //$elecInputMeter = \Meters\Model\Meter::where('site', $site_id)->where('supply_type_global', 1)->whereHas('meterReadings')->first();
+            //$gasInputMeter = \Meters\Model\Meter::where('site', $site_id)->where('supply_type_global', 11)->whereHas('meterReadings')->first();
+            $elecresult = MeterReading::selectRaw('year(reading_date) year, month(reading_date) month,  sum(total) total')
+                    ->where('dataline_id', $elecContract->id)
+                    ->whereBetween('reading_date', [$newdate, date("Y-m-d")])
+                    ->groupBy('year', 'month')
+                    ->orderBy('year')
+                    ->get();
+            //\SystemConfig\Helper\Evolv::log($elecresult->toArray());
+            $counter = 0;
+            foreach ($elecresult as $month):
+                $dateObj = \DateTime::createFromFormat('!m', $month->month);
+                $monthName = $dateObj->format('F'); // March
+                $heatGenerated = MeterReading::where('dataline_id', $heatingContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+                if ($rates->machine_type == 1):
+                    $heatingKwh = $heatGenerated;
+                else:
+                    $heatingKwh = InstallationAction::convertHeatingToKwh($heatGenerated, $rates->boiler_efficiency);
+                endif;
+                $gasConsumed = MeterReading::where('dataline_id', $gasContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+                $elecGen = MeterReading::where('dataline_id', $elecContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+
+                $gaskWh = (($rates->calorific_value * $rates->conversion_factor) / 3.6) * $gasConsumed;
+                //if ($elecInputMeter):
+                //    $inputElec = MeterReading::where('meter_number', $elecInputMeter->meter_number)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+                //endif;
+                //if ($gasInputMeter):
+                //    $inputGas = MeterReading::where('meter_number', $gasInputMeter->meter_number)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+                //    if ($site_id == 13496):
+                //        $inputGaskWh = $inputGas;
+                //    else:
+                //        $inputGaskWh = (($rates->calorific_value * $rates->conversion_factor) / 3.6) * $inputGas;
+                //    endif;
+
+                //endif;
+
+                $results[] = [$monthName . ' ' . $month->year, (int) $heatingKwh, (int) $elecGen, (int) $gaskWh, 0, 0];
+                $counter++;
+            endforeach;
+            return $results;
+
+        else:
+            return $results;
+        endif;
+    }
+
+    public static function convertHeatingToKwh($reading, $boilerEfficiency) {
+        if ($boilerEfficiency > 0):
+            $calc = ($reading * 1000) / $boilerEfficiency;
+            $result = $calc * 100;
+            return $result;
+        else:
+            return 0;
+        endif;
     }
 }

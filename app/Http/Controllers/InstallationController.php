@@ -112,6 +112,11 @@ class InstallationController extends Controller
     public function getinfo( Installation $installation){
         $installation->load('readings');
         Log::info(print_r($installation->toArray(), true));
-        return Response()->json($installation);
+        $meterReadings = InstallationAction::getYearsReadings($installation->id);
+        $results = [
+            'installation' => $installation,
+            'readings' => $meterReadings
+        ];
+        return Response()->json($results);
     }
 }

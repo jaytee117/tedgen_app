@@ -62,11 +62,17 @@ Breadcrumbs::for('installation.create', function (BreadcrumbTrail $trail, Site $
     $trail->push('Create Installation', route('installation.create', $site));
 });
 
+Breadcrumbs::for('installation.viewdata', function (BreadcrumbTrail $trail, Installation $installation): void {
+    $trail->parent('installation.show', $installation);
+    $trail->push('View Installation Data', route('installation.viewdata', $installation));
+});
+
 Breadcrumbs::for('dataline.show', function (BreadcrumbTrail $trail, DataLine $dataline): void {
     $installation = Installation::find($dataline->installation_id);
     $trail->parent('installation.show', $installation);
     $trail->push($dataline->line_reference, route('dataline.show', $dataline));
 });
+
 
 Breadcrumbs::for('user.show', function (BreadcrumbTrail $trail): void {
     $trail->parent('dashboard');

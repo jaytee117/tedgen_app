@@ -6,6 +6,7 @@ use App\Models\Installation;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Actions\InstallationAction;
+use Illuminate\Support\Facades\Log;
 
 class InstallationController extends Controller
 {
@@ -16,6 +17,11 @@ class InstallationController extends Controller
     {
         $installations = Installation::with('site')->orderBy('created_at', 'desc')->paginate(10);
         return view('layouts.installation.index', ['installations' => $installations]);
+    }
+
+    public function viewdata(Installation $installation)
+    {
+        return view('layouts.installation.viewdata', ['installation' => $installation]);
     }
 
     /**
@@ -101,4 +107,9 @@ class InstallationController extends Controller
         ]);
         return $validated;
     }
+
+    public function getinfo(Request $request){
+        Log::info('TWAT');
+    }
+
 }

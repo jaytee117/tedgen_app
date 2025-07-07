@@ -12,8 +12,8 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css" />
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
@@ -26,7 +26,7 @@
                 <a href="{{ route('customer.create') }}" class="btn-success float-end">Create New Customer</a>
             @endif
 
-            
+
         @endauth
         {{ Breadcrumbs::render() }}
     </header>

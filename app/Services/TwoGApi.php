@@ -61,10 +61,10 @@ class TwoGApi
             $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $curlResult = json_decode($result);
             curl_close($ch);
-            if($status == 200):
-            TwoGApi::createDataFrom2G($curlResult, $install, $status);
+            if ($status == 200):
+                TwoGApi::createDataFrom2G($curlResult, $install, $status);
             else:
-                Log::info('Unable to gather reports for '. $install->asset_id .'- report status = ' . $status);
+                Log::info('Unable to gather reports for ' . $install->asset_id . '- report status = ' . $status);
             endif;
         }
     }

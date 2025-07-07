@@ -109,6 +109,6 @@ class InstallationController extends Controller
     }
 
     public function getinfo(Request $request, Installation $installation){
-        Log::info(print_r($request->all(), true));
+        Log::info(print_r($installation, true));
     }
 }

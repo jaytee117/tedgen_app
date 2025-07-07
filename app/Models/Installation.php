@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Site;
 use App\Models\DataLine;
+use App\Models\MeterReading;
 
 class Installation extends Model
 {
@@ -44,6 +45,11 @@ class Installation extends Model
     public function datalines()
     {
         return $this->hasMany(DataLine::class, 'installation_id', 'id');
+    }
+
+    public function readings()
+    {
+        return $this->hasMany(MeterReading::class, 'installation_id', 'id');
     }
 
     public static $_machine_type = [

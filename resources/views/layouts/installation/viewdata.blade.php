@@ -20,7 +20,7 @@
                                 type: 'post',
                                 url: "{{ route('installation.getinfo', $installation) }}",
                                 success: (response) => {
-                                    console.log(response->readings);
+                                    console.log(response.readings);
                                 },
                                 error: function(response) {
                                     $.each(response.responseJSON.errors, function(key,value) {

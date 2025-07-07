@@ -16,6 +16,7 @@
     <!--Datatables Scripts/styles-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>

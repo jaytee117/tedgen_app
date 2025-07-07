@@ -20,13 +20,11 @@
                                 type: 'post',
                                 url: "{{ route('installation.getinfo', $installation) }}",
                                 success: (response) => {
-                                    console.log(response);
+                                    console.log(response->readings);
                                 },
                                 error: function(response) {
-                                    $.each(response.responseJSON.errors, function(key,
-                                        value) {
+                                    $.each(response.responseJSON.errors, function(key,value) {
                                         alert(value);
-
                                     });
                                 }
                             });

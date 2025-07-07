@@ -1,7 +1,7 @@
 @extends('theme.default')
 @section('content')
     <div id="chp-dash">
-        <div id="graphHolder-chp"></div>
+        <div id="barchart-chp"></div>
     </div>
     <script type="text/javascript">
         var ChpDash = {
@@ -53,7 +53,7 @@
                     gasinput.push(ChpDash.monthly[i][5])
                 }
                 ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
-                document.querySelector('#myValueHolder-chp').innerHTML = '';
+                document.querySelector('#barchart-chp').innerHTML = '';
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
                 ChpDash.chart = Highcharts.chart('barchart-chp', {
@@ -253,8 +253,6 @@
                 });
             },
         }
-
-        //ChpDash.initVue();
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function () {

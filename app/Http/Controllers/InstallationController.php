@@ -109,7 +109,6 @@ class InstallationController extends Controller
     }
 
     public function getinfo(Request $request){
-        Log::info(print_r($request->input('installation_id'), true));
+        dd($request->all());
     }
-
 }

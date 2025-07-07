@@ -57,200 +57,44 @@
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
                 console.log(xaxis);
-                ChpDash.chart = Highcharts.chart('barchart-chp', {
-                    title: {
-                        text: 'twat'
+                const chart = Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Active and Trail users'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+                    'Oct', 'Nov', 'Dec'
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Users'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
                     },
-                    subtitle: {
-                        text: ''
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    xAxis: [{
-                        categories: xaxis,
-                        type: 'category',
-                        labels: {
-                            style: {
-                                fontSize: '12px'
-                            }
-                        }
-                    }],
-                    yAxis: [{ // Primary yAxis
-                        labels: {
-                            format: '{value}kWh',
-                            style: {
-                                color: Highcharts.getOptions().colors[1],
-                                fontSize: '12px'
-                            }
-                        },
-                        title: {
-                            text: 'Amount Consumed/Generated',
-                            style: {
-                                color: Highcharts.getOptions().colors[1],
-                                fontSize: '12px'
-                            }
-                        }
-                    }],
-                    tooltip: {
-                        shared: true,
-                        crosshairs: true,
-                        useHTML: true,
-                        headerFormat: '<table><tr><th colspan="2">{point.key}</th></tr>',
-                        pointFormat: '<tr><td style="">{series.name}: </td><td style="text-align: right"><b>{point.y}</b></td></tr>',
-                        footerFormat: '</table>',
-                    },
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'right',
-                        x: -20,
-                        verticalAlign: 'top',
-                        y: 0,
-                        floating: true,
-                        itemStyle: {
-                            color: '#000000',
-                            fontWeight: 'bold',
-                            fontSize: '12px'
-                        },
-                        backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || // theme
-                            'rgba(255,255,255,0.25)'
-                    },
-                    plotOptions: {
-                        column: {
-                            stacking: ChpDash.graphStack,
-                            dataLabels: {
-                                enabled: false
-                            }
-                        },
-                        series: {
-                            centerInCategory: false,
-                            shadow: true
-                        }
-                    },
-                    series: [{
-                            name: ChpDash.heatLabel,
-                            type: 'column',
-                            data: heat,
-                            color: '#6390BA',
-                            tooltip: {
-                                valueSuffix: ChpDash.heatPrefix,
-                                valueDecimals: 0,
-                            },
-                            events: {
-                                click: function(event) {
-                                    if (ChpDash.view == 'monthly') {
-                                        ChpDash.selectedDate = event.point.category;
-                                        ChpDash.getDailys();
-                                        return;
-                                    }
-                                    if (ChpDash.view == 'daily') {
-                                        ChpDash.getHHs(event.point.category);
-                                        return;
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            name: ChpDash.elecLabel,
-                            type: 'column',
-                            data: elec,
-                            color: '#7cb5ec',
-                            tooltip: {
-                                valueSuffix: ' kWh',
-                                valueDecimals: 0,
-                            },
-                            events: {
-                                click: function(event) {
-                                    if (ChpDash.view == 'monthly') {
-                                        ChpDash.selectedDate = event.point.category;
-                                        ChpDash.getDailys();
-                                        return;
-                                    }
-                                    if (ChpDash.view == 'daily') {
-                                        ChpDash.getHHs(event.point.category);
-                                        return;
-                                    }
-                                }
-                            }
-
-                        },
-
-                        {
-                            name: 'Gas Consumed',
-                            type: 'column',
-                            stacking: false,
-                            data: gas,
-                            color: 'lightgreen',
-                            tooltip: {
-                                valueSuffix: ' kWh',
-                                valueDecimals: 0
-                            },
-                            events: {
-                                click: function(event) {
-                                    if (ChpDash.view == 'monthly') {
-                                        ChpDash.selectedDate = event.point.category;
-                                        ChpDash.getDailys();
-                                        return;
-                                    }
-                                    if (ChpDash.view == 'daily') {
-                                        ChpDash.getHHs(event.point.category);
-                                        return;
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            name: 'Electricity To Site',
-                            type: 'spline',
-                            data: elecinput,
-                            color: 'orange',
-                            dashStyle: 'dash',
-                            tooltip: {
-                                valueSuffix: ' kWh',
-                                valueDecimals: 0,
-                            },
-                            events: {
-                                click: function(event) {
-                                    if (ChpDash.view == 'monthly') {
-                                        ChpDash.selectedDate = event.point.category;
-                                        ChpDash.getDailys();
-                                        return;
-                                    }
-                                    if (ChpDash.view == 'daily') {
-                                        ChpDash.getHHs(event.point.category);
-                                        return;
-                                    }
-                                }
-                            }
-
-                        },
-                        {
-                            name: 'Gas To Site',
-                            type: 'spline',
-                            data: gasinput,
-                            color: 'red',
-                            dashStyle: 'dash',
-                            tooltip: {
-                                valueSuffix: ' kWh',
-                                valueDecimals: 0,
-                            },
-                            events: {
-                                click: function(event) {
-                                    if (ChpDash.view == 'monthly') {
-                                        ChpDash.selectedDate = event.point.category;
-                                        ChpDash.getDailys();
-                                        return;
-                                    }
-                                    if (ChpDash.view == 'daily') {
-                                        ChpDash.getHHs(event.point.category);
-                                        return;
-                                    }
-                                }
-                            }
-
-                        }
-                    ]
-                });
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Active',
+                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9,
+                    9.6
+                ]
+            }, {
+                name: 'Trial',
+                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            }]
+        });
             },
         }
     </script>

@@ -57,7 +57,7 @@ class InstallationAction
      public static function getYearsReadings($installation_id) {
         $newdate = date("Y-m-d", strtotime("-11 months"));
         $results = [];
-        $rates = Installation::where('installation_id', $installation_id)->first();
+        $rates = Installation::where('id', $installation_id)->first();
 
         $heatingContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 1)->where('supply_status', 3)->first();
         $elecContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 2)->where('supply_status', 3)->first();

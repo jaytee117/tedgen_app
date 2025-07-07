@@ -20,7 +20,7 @@
                                 type: 'post',
                                 url: "{{ route('installation.getinfo', $installation) }}",
                                 success: (response) => {
-                                    console.log(response.readings);
+                                    //console.log(response.readings);
                                     ChpDash.monthly = response.readings;
                                     ChpDash.loadYearView();
                                 },
@@ -56,6 +56,7 @@
                 document.querySelector('#barchart-chp').innerHTML = '';
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
+                console.log(xaxis);
                 ChpDash.chart = Highcharts.chart('barchart-chp', {
                     title: {
                         //text: ChpDash.graphTitle

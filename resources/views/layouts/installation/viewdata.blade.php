@@ -1,6 +1,7 @@
 @extends('theme.default')
 @section('content')
     <div id="chp-dash">
+        test
         <div id="barchart-chp" style="width:99.5%;height:600px"></div>
     </div>
     <script type="text/javascript">

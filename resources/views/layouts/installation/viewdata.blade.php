@@ -13,14 +13,13 @@
                     },
                     methods: {
                         getSiteData: function() {
-                            var data = {'installation_id': {{ $installation->id  }}};
                             $.ajax({
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
-                                type: 'POST',
-                                url: "{{ route('installation.getinfo') }}",
-                                data: data,
+                                type: 'post',
+                                url: "{{ route('installation.getinfo', $installation) }}",
+                                data: [],
                                 contentType: false,
                                 processData: false,
                                 success: (response) => {

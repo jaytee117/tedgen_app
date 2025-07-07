@@ -108,7 +108,7 @@ class InstallationController extends Controller
         return $validated;
     }
 
-    public function getinfo(Request $request){
+    public function getinfo(Request $request, Installation $installation){
         Log::info(print_r($request->all(), true));
     }
 }

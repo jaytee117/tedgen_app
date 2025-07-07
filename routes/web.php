@@ -66,7 +66,7 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::post('/installation/update/{id}', 'update')->middleware(['role:employee|admin'])->name('installation.update');
     Route::delete('/installation/{installation}', 'destroy')->name('installation.destroy');
     Route::get('/installation/viewdata/{installation}', 'viewdata')->name('installation.viewdata');
-    Route::post('/installation/getinfo', 'getinfo')->name('installation.getinfo');
+    Route::post('/installation/getinfo/{installation}', 'getinfo')->name('installation.getinfo');
 });
 
 //dataline routes

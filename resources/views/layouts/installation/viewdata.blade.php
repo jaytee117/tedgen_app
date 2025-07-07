@@ -1,7 +1,6 @@
 @extends('theme.default')
 @section('content')
     <div id="chp-dash">
-        test
         <div id="barchart-chp" style="width:99.5%;height:600px"></div>
     </div>
     <script type="text/javascript">
@@ -57,7 +56,7 @@
                 //document.querySelector('#barchart-chp').innerHTML = '';
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
-                //sconsole.log(xaxis);
+                console.log(xaxis);
                 const chart = Highcharts.chart('barchart-chp', {
                     chart: {
                         type: 'line'

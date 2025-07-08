@@ -60,7 +60,7 @@
                         type: 'line'
                     },
                     title: {
-                        text: 'CHP usgae Graphs'
+                        text: 'CHP Usage Graphs'
                     },
                     subtitle: {
                         text: ''
@@ -84,16 +84,19 @@
                     series: [{
                         name: 'Heat Generated',
                         type: 'column',
-                        data: heat
+                        data: heat,
+                        color: '#6390BA',
                     }, {
                         name: 'Electricity Generated',
                         type: 'column',
-                        data: elec
+                        data: elec,
+                        color: '#7cb5ec',
                     },
                 {
                         name: 'Gas Consumed',
                         type: 'column',
-                        data: gas
+                        data: gas,
+                        color: 'lightgreen',
                     }]
                 });
             },

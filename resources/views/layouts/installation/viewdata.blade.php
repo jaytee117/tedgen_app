@@ -103,7 +103,7 @@
                         }
                         ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
                         ChpDash.active.selectedDate = ChpDash.selectedDate;
-                        document.querySelector('#barchart-chp').innerHTML = '<button type="button" class="btn btn-primary btn-lg" onclick="ChpDash.loadYearView();"><span class="glyphicon glyphicon-triangle-left"></span> View Monthly</button>';
+                        document.querySelector('#barchart-chp').append = '<button type="button" class="btn btn-primary btn-lg" onclick="ChpDash.loadYearView();"><span class="glyphicon glyphicon-triangle-left"></span> View Monthly</button>';
                 
                     },
                     error: function(response) {

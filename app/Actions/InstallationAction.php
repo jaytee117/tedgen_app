@@ -96,9 +96,9 @@ class InstallationAction
     public static function getMonthsReadings($installation_id,$month)
     {
         $rates = Installation::where('id', $installation_id)->first();
-        $heatingContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 1)->first();
-        $elecContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 2)->first();
-        $gasContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 3)->first();
+        $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->first();
+        $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->first();
+        $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->first();
         if ($heatingContract && $elecContract && $gasContract):
             $usage = [];
             $timestamp = strtotime($month);

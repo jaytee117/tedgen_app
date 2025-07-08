@@ -5,6 +5,10 @@
     </div>
     <script type="text/javascript">
         var ChpDash = {
+            monthsview: true,
+            selectedMonth: false,
+            view: 'monthly',
+            selectedDate: '',
             initVue: function() {
                 ChpDash.active = new Vue({
                     el: '#chp-dash',
@@ -21,6 +25,20 @@
                                 url: "{{ route('installation.getinfo', $installation) }}",
                                 success: (response) => {
                                     ChpDash.monthly = response.readings;
+                                    ChpDash.machineType = response.machine_type;
+                                    if (ChpDash.machineType == 1) {
+                                        ChpDash.elecLabel = 'Electricty Generated Line 1';
+                                        ChpDash.heatLabel = 'Electricty Generated Line 2';
+                                        ChpDash.heatPrefix = ' kWh';
+                                        ChpDash.graphTitle = 'GENSET Usage';
+                                        ChpDash.graphStack = 'normal';
+                                    } else {
+                                        ChpDash.elecLabel = 'Electricty Generated';
+                                        ChpDash.heatLabel = 'Heat Generated';
+                                        ChpDash.heatPrefix = ' kWth';
+                                        ChpDash.graphTitle = 'CHP Usage';
+                                        ChpDash.graphStack = false;
+                                    }
                                     ChpDash.loadYearView();
                                 },
                                 error: function(response) {
@@ -34,6 +52,7 @@
                     }
                 })
             },
+
             loadYearView: function() {
                 ChpDash.view = 'monthly';
                 var elec = [];
@@ -54,6 +73,7 @@
                 ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
                 //document.querySelector('#barchart-chp').innerHTML = '';
             },
+
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
                 const chart = Highcharts.chart('barchart-chp', {
                     chart: {
@@ -74,7 +94,7 @@
                             }
                         }
                     }],
-                    yAxis: [{// Primary yAxis
+                    yAxis: [{ // Primary yAxis
                         labels: {
                             format: '{value}kWh',
                             style: {
@@ -91,30 +111,52 @@
                         }
                     }],
                     plotOptions: {
-                        line: {
+                        column: {
+                            stacking: ChpDash.graphStack,
                             dataLabels: {
-                                enabled: true
-                            },
-                            enableMouseTracking: false
+                                enabled: false
+                            }
+                        },
+                        series: {
+                            centerInCategory: false,
+                            shadow: true
                         }
                     },
                     series: [{
-                        name: 'Heat Generated',
-                        type: 'column',
-                        data: heat,
-                        color: '#6390BA',
-                    }, {
-                        name: 'Electricity Generated',
-                        type: 'column',
-                        data: elec,
-                        color: '#7cb5ec',
-                    },
-                {
-                        name: 'Gas Consumed',
-                        type: 'column',
-                        data: gas,
-                        color: 'lightgreen',
-                    }]
+                            name: ChpDash.heatLabel,
+                            type: 'column',
+                            data: heat,
+                            color: '#6390BA',
+                            tooltip: {
+                                valueSuffix: ChpDash.heatPrefix,
+                                valueDecimals: 0,
+                            },
+                            events: {
+                                click: function(event) {
+                                    if (ChpDash.view == 'monthly') {
+                                        ChpDash.selectedDate = event.point.category;
+                                        ChpDash.getDailys();
+                                        return;
+                                    }
+                                    if (ChpDash.view == 'daily') {
+                                        ChpDash.getHHs(event.point.category);
+                                        return;
+                                    }
+                                }
+                            }
+                        }, {
+                            name: ChpDash.elecLabel,
+                            type: 'column',
+                            data: elec,
+                            color: '#7cb5ec',
+                        },
+                        {
+                            name: 'Gas Consumed',
+                            type: 'column',
+                            data: gas,
+                            color: 'lightgreen',
+                        }
+                    ]
                 });
             },
         }

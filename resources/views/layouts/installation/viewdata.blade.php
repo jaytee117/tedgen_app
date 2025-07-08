@@ -20,7 +20,6 @@
                                 type: 'post',
                                 url: "{{ route('installation.getinfo', $installation) }}",
                                 success: (response) => {
-                                    console.log(response.readings);
                                     ChpDash.monthly = response.readings;
                                     ChpDash.loadYearView();
                                 },
@@ -91,6 +90,11 @@
                         name: 'Electricity Generated',
                         type: 'column',
                         data: elec
+                    },
+                {
+                        name: 'Gas Consumed',
+                        type: 'column',
+                        data: gas
                     }]
                 });
             },

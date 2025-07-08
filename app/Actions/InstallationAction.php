@@ -100,8 +100,8 @@ class InstallationAction
         Log::info($boilerEfficiency);
         if ($boilerEfficiency > 0):
             $calc = ($reading * 1000) / $boilerEfficiency;
-            //$result = $calc * 100;
-            return $calc;
+            $result = $calc * 100;
+            return $result;
         else:
             return 0;
         endif;

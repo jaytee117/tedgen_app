@@ -137,9 +137,9 @@ class InstallationAction
     public static function getHHReadings($installation_id, $date)
     {
         $rates = Installation::where('id', $installation_id)->first();
-        $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->where('supply_status', 3)->first();
-        $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->where('supply_status', 3)->first();
-        $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->where('supply_status', 3)->first();
+        $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->first();
+        $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->first();
+        $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->first();
         //$elecInputMeter = \Meters\Model\Meter::where('site', $data['site_id'])->where('supply_type_global', 1)->first();
         //$gasInputMeter = \Meters\Model\Meter::where('site', $data['site_id'])->where('supply_type_global', 11)->whereHas('meterReadings')->first();
         $date = \DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');

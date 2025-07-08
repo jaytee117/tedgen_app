@@ -75,12 +75,13 @@ class InstallationAction
                 $dateObj = \DateTime::createFromFormat('!m', $month->month);
                 $monthName = $dateObj->format('F'); // March
                 $heatGenerated = MeterReading::where('dataline_id', $heatingContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
-                Log::info(print_r($heatGenerated, true));
+                
                 if ($rates->machine_type == 1):
                     $heatingKwh = $heatGenerated;
                 else:
                     $heatingKwh = InstallationAction::convertHeatingToKwh($heatGenerated, $rates->boiler_efficiency);
                 endif;
+                Log::info(print_r($heatingKwh, true));
                 $gasConsumed = MeterReading::where('dataline_id', $gasContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
                 $elecGen = MeterReading::where('dataline_id', $elecContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
                 $gaskWh = (($rates->calorific_value * $rates->conversion_factor) / 3.6) * $gasConsumed;

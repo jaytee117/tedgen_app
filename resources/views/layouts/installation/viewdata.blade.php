@@ -90,7 +90,7 @@
                         var elecinput = [];
                         var gasinput = [];
                         var xaxis = [];
-                        var arrayLength = response.data.length;
+                        var arrayLength = response.length;
                         for (var i = 0; i < arrayLength; i++) {
                             xaxis.push(response.data[i][0]);
                             elec.push(response.data[i][2]);

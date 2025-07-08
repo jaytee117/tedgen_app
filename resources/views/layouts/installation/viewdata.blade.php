@@ -114,6 +114,7 @@
             },
 
             getHHs: function(selectedDate) {
+                console.log(selectedDate);
                 ChpDash.view = 'hh';
                 $.ajax({
                     headers: {

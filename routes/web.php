@@ -67,6 +67,8 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::delete('/installation/{installation}', 'destroy')->name('installation.destroy');
     Route::get('/installation/viewdata/{installation}', 'viewdata')->name('installation.viewdata');
     Route::post('/installation/getinfo/{installation}', 'getinfo')->name('installation.getinfo');
+    Route::post('/installation/getinfoMonthly/{installation}', 'getinfoMonthly')->name('installation.getinfoMonthly');
+
 });
 
 //dataline routes

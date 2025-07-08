@@ -74,6 +74,42 @@
                 //document.querySelector('#barchart-chp').innerHTML = '';
             },
 
+            getDailys: function() {
+                ChpDash.view = 'daily';
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: "{{ route('installation.getinfoMonthly', $installation,ChpDash.selectedDate) }}",
+                    success: (response) => {
+                        var elec = [];
+                        var gas = [];
+                        var heat = [];
+                        var elecinput = [];
+                        var gasinput = [];
+                        var xaxis = [];
+                        var arrayLength = response.data.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            xaxis.push(response.data[i][0]);
+                            elec.push(response.data[i][2]);
+                            heat.push(response.data[i][1]);
+                            gas.push(response.data[i][3]);
+                            elecinput.push(response.data[i][4]);
+                            gasinput.push(response.data[i][5]);
+                        }
+                        ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
+                        ChpDash.active.selectedDate = ChpDash.selectedDate;
+                    },
+                    error: function(response) {
+                        $.each(response.responseJSON.errors, function(key,
+                            value) {
+                            alert(value);
+                        });
+                    }
+                });
+            },
+
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
                 const chart = Highcharts.chart('barchart-chp', {
                     chart: {

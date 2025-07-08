@@ -75,8 +75,6 @@ class InstallationAction
                 $dateObj = \DateTime::createFromFormat('!m', $month->month);
                 $monthName = $dateObj->format('F'); // March
                 $heatGenerated = MeterReading::where('dataline_id', $heatingContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
-                $heatGeneratedx = MeterReading::where('dataline_id', $heatingContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->get()->toArray();
-                Log::info(print_r($heatGeneratedx, true));
                 if ($rates->machine_type == 1):
                     $heatingKwh = $heatGenerated;
                 else:
@@ -96,8 +94,6 @@ class InstallationAction
     }
 
     public static function convertHeatingToKwh($reading, $boilerEfficiency) {
-        Log::info($reading);
-        Log::info($boilerEfficiency);
         if ($boilerEfficiency > 0):
             $calc = ($reading * 1000) / $boilerEfficiency;
             $result = $calc * 100;

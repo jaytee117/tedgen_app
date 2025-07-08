@@ -114,7 +114,7 @@
                 <div class="card-body">
                     <img src="storage/{{ $install->site['site_img'] }}" alt="Uploaded File" class="img-responsive">
                 </div>
-                <a href="{{ route('installation.viewdata', $install) }}" class="btn">View Details</a>
+                <a href="{{ route('installation.viewdata', $install) }}" class="btn btn-default">View Details</a>
             </div>
             
         </div>

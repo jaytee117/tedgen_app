@@ -123,7 +123,7 @@
                     type: 'post',
                     url: "{{ route('installation.getinfoHH', $installation) }}",
                     data: {
-                        'date': ChpDash.selectedDate
+                        'date': selectedDate
                     },
                     success: (response) => {
                         var elec = [];

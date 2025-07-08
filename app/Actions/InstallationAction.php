@@ -140,7 +140,7 @@ class InstallationAction
         $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->first();
         $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->first();
         $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->first();
-        Log::info($readingdate);die;
+        Log::info($readingdate);
         $date = \DateTime::createFromFormat('d-m-Y', $readingdate)->format('Y-m-d');
 
         $heatingreadings = MeterReading::where('dataline_id', $heatingContract->id)->where('reading_date', $date)->first();

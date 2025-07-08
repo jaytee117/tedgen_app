@@ -81,7 +81,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'post',
-                    url: "{{ route('installation.getinfoMonthly') }}",
+                    url: "{{ route('installation.getinfoMonthly', $installation) }}",
                     data: ['month' : ChpDash.selectedDate, 'installation': $installation],
                     success: (response) => {
                         var elec = [];

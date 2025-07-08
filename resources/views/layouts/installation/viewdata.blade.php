@@ -82,7 +82,7 @@
                     },
                     type: 'post',
                     url: "{{ route('installation.getinfoMonthly', $installation) }}",
-                    data: {'month': ChpDash.selectedDate, 'installation': $installation},
+                    data: {'month': ChpDash.selectedDate},
                     success: (response) => {
                         var elec = [];
                         var gas = [];

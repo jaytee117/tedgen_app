@@ -100,7 +100,7 @@ class InstallationAction
         if ($boilerEfficiency > 0):
             $calc = ($reading * 1000) / $boilerEfficiency;
             $result = $calc * 100;
-            return $result;
+            return $calc;
         else:
             return 0;
         endif;

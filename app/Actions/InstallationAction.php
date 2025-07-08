@@ -93,7 +93,7 @@ class InstallationAction
         endif;
     }
 
-    public static function getMonthsReadings($installation_id, $month)
+    public static function getMonthsReadings($installation_id)
     {
         $rates = Installation::where('id', $installation_id)->first();
         $heatingContract = DataLine::where('installation_id', $installation_id)->where('contract_type', 1)->first();

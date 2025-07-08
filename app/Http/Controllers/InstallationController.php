@@ -119,14 +119,13 @@ class InstallationController extends Controller
         return Response()->json($results);
     }
 
-    public function getInfoMonthlyAction(Installation $installation, $date) {
-        $installation->load('readings');
-        $results = InstallationAction::getMonthsReadings($installation->id, $date);
-
-        
-        return new JsonModel([
-            'success' => true,
-            'data' => $results->data
-        ]);
+    public function getInfoMonthlyAction(Request $request) {
+        Log::info($request->all());
+        //$installation->load('readings');
+        //$results = InstallationAction::getMonthsReadings($installation->id, $month);        
+        //return new JsonModel([
+        //    'success' => true,
+        //    'data' => $results->data
+        //]);
     }
 }

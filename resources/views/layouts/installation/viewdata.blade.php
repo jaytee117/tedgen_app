@@ -157,12 +157,46 @@
                             type: 'column',
                             data: elec,
                             color: '#7cb5ec',
+                            tooltip: {
+                                valueSuffix: ' kWh',
+                                valueDecimals: 0,
+                            },
+                            events: {
+                                click: function(event) {
+                                    if (ChpDash.view == 'monthly') {
+                                        ChpDash.selectedDate = event.point.category;
+                                        ChpDash.getDailys();
+                                        return;
+                                    }
+                                    if (ChpDash.view == 'daily') {
+                                        ChpDash.getHHs(event.point.category);
+                                        return;
+                                    }
+                                }
+                            }
                         },
                         {
                             name: 'Gas Consumed',
                             type: 'column',
                             data: gas,
                             color: 'lightgreen',
+                            tooltip: {
+                                valueSuffix: ' kWh',
+                                valueDecimals: 0
+                            },
+                            events: {
+                                click: function(event) {
+                                    if (ChpDash.view == 'monthly') {
+                                        ChpDash.selectedDate = event.point.category;
+                                        ChpDash.getDailys();
+                                        return;
+                                    }
+                                    if (ChpDash.view == 'daily') {
+                                        ChpDash.getHHs(event.point.category);
+                                        return;
+                                    }
+                                }
+                            }
                         }
                     ]
                 });

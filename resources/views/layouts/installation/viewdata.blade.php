@@ -65,9 +65,15 @@
                     subtitle: {
                         text: ''
                     },
-                    xAxis: {
-                        categories: xaxis
-                    },
+                    xAxis: [{
+                        categories: xaxis,
+                        type: 'category',
+                        labels: {
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    }],
                     yAxis: {
                         title: {
                             text: 'Users'

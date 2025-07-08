@@ -140,30 +140,21 @@ class InstallationAction
         $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->first();
         $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->first();
         $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->first();
-        Log::info($readingdate);
         $date = \DateTime::createFromFormat('d-m-Y', $readingdate)->format('Y-m-d');
-
         $heatingreadings = MeterReading::where('dataline_id', $heatingContract->id)->where('reading_date', $date)->first();
         $gasreadings = MeterReading::where('dataline_id', $gasContract->id)->where('reading_date', $date)->first();
         $elecreadings = MeterReading::where('dataline_id', $elecContract->id)->where('reading_date', $date)->first();
-
-
         $hhdata_heating = json_decode($heatingreadings->hh_data);
         $hhdata_elec = json_decode($elecreadings->hh_data);
         $hhdata_gas = json_decode($gasreadings->hh_data);
-
         $hhdata_elecinput = false;
-
         $hhdata_gasinput = false;
-
-
         $start = "00:00";
         $end = "23:30";
         $tStart = strtotime($start);
         $tEnd = strtotime($end);
         $tNow = $tStart;
         $i = 0;
-        //$g = -1; //used to offset Gas to Site on Massey Preston by one block, 
         while ($tNow <= $tEnd) {
             if ($rates->machine_type == 1):
                 $heatingKwh = $hhdata_heating[$i];
@@ -180,7 +171,6 @@ class InstallationAction
             $hh[] = [date("H:i", $tNow), $heatingKwh, $hhdata_elec[$i], $gaskWh, 0, 0];
             $tNow = strtotime('+30 minutes', $tNow);
             $i++;
-            //$g++;
         }
         //this part determines if its a 2g API, strip out the half hour reads as it only reads on the hour
         if ($rates->chp_logger_type == 4):
@@ -192,8 +182,6 @@ class InstallationAction
         else:
             $data = $hh;
         endif;
-
-        //$notes = \Notes\Model\Note::where('model', 'ChpReading')->with('author')->where('model_id', $gasreadings->reading_id)->get();
         return $data;
     }
 

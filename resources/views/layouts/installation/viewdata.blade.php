@@ -52,23 +52,31 @@
                     gasinput.push(ChpDash.monthly[i][5])
                 }
                 ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
-                //document.querySelector('#barchart-chp').innerHTML = '';
+                document.querySelector('#barchart-chp').innerHTML = '';
             },
             drawBarChart: function(xaxis, elec, gas, heat, elecinput, gasinput) {
-                console.log(xaxis);
                 const chart = Highcharts.chart('barchart-chp', {
                     chart: {
                         type: 'line'
                     },
                     title: {
-                        text: 'Active and Trail users'
+                        text: 'CHP usgae Graphs'
                     },
                     subtitle: {
                         text: ''
                     },
-                    xAxis: {
-                        categories: xaxis
+                    credits: {
+                        enabled: false
                     },
+                    xAxis: [{
+                        categories: xaxis,
+                        type: 'category',
+                        labels: {
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    }],
                     yAxis: {
                         title: {
                             text: 'Users'
@@ -83,19 +91,20 @@
                         }
                     },
                     series: [{
-                        name: 'Heat Generated',
-                        type: 'column',
-                        data: heat
-                    }, {
-                        name: 'Electricity Generated',
-                        type: 'column',
-                        data: elec
-                    },
-                {
-                        name: 'Gas Consumed',
-                        type: 'column',
-                        data: gas
-                    }]
+                            name: 'Heat Generated',
+                            type: 'column',
+                            data: heat
+                        }, {
+                            name: 'Electricity Generated',
+                            type: 'column',
+                            data: elec
+                        },
+                        {
+                            name: 'Gas Consumed',
+                            type: 'column',
+                            data: gas
+                        }
+                    ]
                 });
             },
         }

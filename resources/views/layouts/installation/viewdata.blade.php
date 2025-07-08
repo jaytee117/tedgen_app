@@ -92,12 +92,12 @@
                         var xaxis = [];
                         var arrayLength = response.length;
                         for (var i = 0; i < arrayLength; i++) {
-                            xaxis.push(response.data[i][0]);
-                            elec.push(response.data[i][2]);
-                            heat.push(response.data[i][1]);
-                            gas.push(response.data[i][3]);
-                            elecinput.push(response.data[i][4]);
-                            gasinput.push(response.data[i][5]);
+                            xaxis.push(response[i][0]);
+                            elec.push(response[i][2]);
+                            heat.push(response[i][1]);
+                            gas.push(response[i][3]);
+                            elecinput.push(response[i][4]);
+                            gasinput.push(response[i][5]);
                         }
                         ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
                         ChpDash.active.selectedDate = ChpDash.selectedDate;

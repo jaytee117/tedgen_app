@@ -74,11 +74,22 @@
                             }
                         }
                     }],
-                    yAxis: {
+                    yAxis: [{// Primary yAxis
+                        labels: {
+                            format: '{value}kWh',
+                            style: {
+                                color: Highcharts.getOptions().colors[1],
+                                fontSize: '12px'
+                            }
+                        },
                         title: {
-                            text: 'Users'
+                            text: 'Amount Consumed/Generated',
+                            style: {
+                                color: Highcharts.getOptions().colors[1],
+                                fontSize: '12px'
+                            }
                         }
-                    },
+                    }],
                     plotOptions: {
                         line: {
                             dataLabels: {

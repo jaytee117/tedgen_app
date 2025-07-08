@@ -95,6 +95,8 @@ class InstallationAction
     }
 
     public static function convertHeatingToKwh($reading, $boilerEfficiency) {
+        Log::info($reading);
+        Log::info($boilerEfficiency);
         if ($boilerEfficiency > 0):
             $calc = ($reading * 1000) / $boilerEfficiency;
             $result = $calc * 100;

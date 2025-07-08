@@ -68,15 +68,9 @@
                     credits: {
                         enabled: false
                     },
-                    xAxis: [{
-                        categories: xaxis,
-                        type: 'category',
-                        labels: {
-                            style: {
-                                fontSize: '12px'
-                            }
-                        }
-                    }],
+                    xAxis: {
+                        categories: xaxis
+                    },
                     yAxis: {
                         title: {
                             text: 'Users'

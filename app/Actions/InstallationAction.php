@@ -70,11 +70,12 @@ class InstallationAction
                     ->orderBy('year')
                     ->get();
             $counter = 0;
-            Log::info(print_r($elecresult, true));
+            
             foreach ($elecresult as $month):
                 $dateObj = \DateTime::createFromFormat('!m', $month->month);
                 $monthName = $dateObj->format('F'); // March
                 $heatGenerated = MeterReading::where('dataline_id', $heatingContract->id)->whereMonth('reading_date', $month->month)->whereYear('reading_date', $month->year)->sum('total');
+                Log::info(print_r($heatGenerated, true));
                 if ($rates->machine_type == 1):
                     $heatingKwh = $heatGenerated;
                 else:

@@ -123,7 +123,8 @@ class InstallationController extends Controller
         
         $installation->load('readings');
         $results = InstallationAction::getMonthsReadings($installation->id, $request->month);  
-        Log::info(print_r($results, true));      
+        Log::info(print_r($results, true)); 
+        return Response()->json($results);     
         //return new JsonModel([
         //    'success' => true,
         //    'data' => $results->data

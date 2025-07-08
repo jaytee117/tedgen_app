@@ -134,14 +134,15 @@ class InstallationAction
         endif;
     }
 
-    public static function getHHReadings($installation_id, $date)
+    public static function getHHReadings($installation_id, $readingdate)
     {
         $rates = Installation::where('id', $installation_id)->first();
         $heatingContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 1)->first();
         $elecContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 2)->first();
         $gasContract = DataLine::where('installation_id', $installation_id)->where('data_line_type', 3)->first();
-        $date = \DateTime::createFromFormat('d-m-Y', $date)->format('Y-m-d');
-Log::info($date);
+        Log::info($readingdate);die;
+        $date = \DateTime::createFromFormat('d-m-Y', $readingdate)->format('Y-m-d');
+
         $heatingreadings = MeterReading::where('dataline_id', $heatingContract->id)->where('reading_date', $date)->first();
         $gasreadings = MeterReading::where('dataline_id', $gasContract->id)->where('reading_date', $date)->first();
         $elecreadings = MeterReading::where('dataline_id', $elecContract->id)->where('reading_date', $date)->first();

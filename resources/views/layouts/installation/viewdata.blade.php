@@ -82,7 +82,48 @@
                     },
                     type: 'post',
                     url: "{{ route('installation.getinfoMonthly', $installation) }}",
-                    data: {'month': ChpDash.selectedDate},
+                    data: {
+                        'month': ChpDash.selectedDate
+                    },
+                    success: (response) => {
+                        var elec = [];
+                        var gas = [];
+                        var heat = [];
+                        var elecinput = [];
+                        var gasinput = [];
+                        var xaxis = [];
+                        var arrayLength = response.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            xaxis.push(response[i][0]);
+                            elec.push(response[i][2]);
+                            heat.push(response[i][1]);
+                            gas.push(response[i][3]);
+                            elecinput.push(response[i][4]);
+                            gasinput.push(response[i][5]);
+                        }
+                        ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
+                        ChpDash.active.selectedDate = ChpDash.selectedDate;
+                    },
+                    error: function(response) {
+                        $.each(response.responseJSON.errors, function(key,
+                            value) {
+                            alert(value);
+                        });
+                    }
+                });
+            },
+
+            getHHs: function(selectedDate) {
+                ChpDash.view = 'hh';
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: "{{ route('installation.getinfoHH', $installation) }}",
+                    data: {
+                        'date': ChpDash.selectedDate
+                    },
                     success: (response) => {
                         var elec = [];
                         var gas = [];

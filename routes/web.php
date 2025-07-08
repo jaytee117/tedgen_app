@@ -68,6 +68,7 @@ Route::middleware('auth')->controller(InstallationController::class)->group(func
     Route::get('/installation/viewdata/{installation}', 'viewdata')->name('installation.viewdata');
     Route::post('/installation/getinfo/{installation}', 'getinfo')->name('installation.getinfo');
     Route::post('/installation/getinfoMonthly/{installation}', 'getinfoMonthly')->name('installation.getinfoMonthly');
+    Route::post('/installation/getinfoHH/{installation}', 'getinfoHH')->name('installation.getinfoHH');
 
 });
 

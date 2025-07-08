@@ -6,6 +6,7 @@ use App\Models\DataLine;
 use App\Models\Installation;
 use App\Models\LastCount;
 use App\Models\MeterReading;
+use Illuminate\Support\Facades\Log;
 
 class InstallationAction
 {

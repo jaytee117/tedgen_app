@@ -65,9 +65,6 @@
                     subtitle: {
                         text: ''
                     },
-                    credits: {
-                        enabled: false
-                    },
                     xAxis: {
                         categories: xaxis
                     },
@@ -85,20 +82,19 @@
                         }
                     },
                     series: [{
-                            name: 'Heat Generated',
-                            type: 'column',
-                            data: heat
-                        }, {
-                            name: 'Electricity Generated',
-                            type: 'column',
-                            data: elec
-                        },
-                        {
-                            name: 'Gas Consumed',
-                            type: 'column',
-                            data: gas
-                        }
-                    ]
+                        name: 'Heat Generated',
+                        type: 'column',
+                        data: heat
+                    }, {
+                        name: 'Electricity Generated',
+                        type: 'column',
+                        data: elec
+                    },
+                {
+                        name: 'Gas Consumed',
+                        type: 'column',
+                        data: gas
+                    }]
                 });
             },
         }

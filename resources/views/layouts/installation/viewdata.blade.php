@@ -110,6 +110,14 @@
                             }
                         }
                     }],
+                    tooltip: {
+                        shared: true,
+                        crosshairs: true,
+                        useHTML: true,
+                        headerFormat: '<table><tr><th colspan="2">{point.key}</th></tr>',
+                        pointFormat: '<tr><td style="">{series.name}: </td><td style="text-align: right"><b>{point.y}</b></td></tr>',
+                        footerFormat: '</table>',
+                    },
                     plotOptions: {
                         column: {
                             stacking: ChpDash.graphStack,

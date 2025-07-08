@@ -173,7 +173,7 @@ class InstallationAction
             $i++;
         }
         //this part determines if its a 2g API, strip out the half hour reads as it only reads on the hour
-        if ($rates->chp_logger_type == 4):
+        if ($rates->logger_type == 4):
             foreach ($hh as $key => $one) {
                 if (strpos($one[0], ':30') > 0)
                     unset($hh[$key]);

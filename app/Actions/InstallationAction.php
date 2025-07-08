@@ -69,6 +69,7 @@ class InstallationAction
                     ->orderBy('year')
                     ->get();
             $counter = 0;
+            Log::info(print_r($elecresult, true));
             foreach ($elecresult as $month):
                 $dateObj = \DateTime::createFromFormat('!m', $month->month);
                 $monthName = $dateObj->format('F'); // March

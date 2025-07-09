@@ -185,6 +185,57 @@ class InstallationAction
         return $data;
     }
 
+    public static function getDashboardStats(){
+        $todayDT = new \DateTime();
+        $today = $todayDT->format("Y-m-d");
+        $todayminusone = $todayDT->add(\DateInterval::createFromDateString('yesterday'));
+        $yesterday = $todayminusone->format("Y-m-d");
+        $month = date("m");
+        $year = date("Y");
+
+        $heatDataLines = DataLine::where('data_line_type', 1)->pluck('id');
+        $heatToday = MeterReading::whereIn('dataline_id', $heatDataLines)->where('reading_date', $today)->sum('total');
+        $heatTodaykWh = InstallationAction::convertHeatingToKwh($heatToday, 70);
+        $heatYesterday = MeterReading::whereIn('dataline_id', $heatDataLines)->where('reading_date', $yesterday)->sum('total');
+        $heatYesterdaykWh = InstallationAction::convertHeatingToKwh($heatYesterday, 70);
+        $heatThisMonth = MeterReading::whereIn('dataline_id', $heatDataLines)->whereMonth('reading_date', $month)->sum('total');
+        $heatThisMonthkWh = InstallationAction::convertHeatingToKwh($heatThisMonth, 70);
+        $heatThisYear = MeterReading::whereIn('dataline_id', $heatDataLines)->whereYear('reading_date', $year)->sum('total');
+        $heatThisYearkWh = InstallationAction::convertHeatingToKwh($heatThisYear, 70);
+
+        $elecDataLines = DataLine::where('data_line_type', 2)->pluck('id');
+        $elecToday = MeterReading::whereIn('dataline_id', $elecDataLines)->where('reading_date', $today)->sum('total');        
+        $elecYesterday = MeterReading::whereIn('dataline_id', $elecDataLines)->where('reading_date', $yesterday)->sum('total');       
+        $elecThisMonth = MeterReading::whereIn('dataline_id', $elecDataLines)->whereMonth('reading_date', $month)->sum('total');        
+        $elecThisYear = MeterReading::whereIn('dataline_id', $elecDataLines)->whereYear('reading_date', $year)->sum('total');
+
+        $gasDataLines = DataLine::where('data_line_type', 3)->pluck('id');
+        $gasToday = MeterReading::whereIn('dataline_id', $gasDataLines)->where('reading_date', $today)->sum('total');
+        $gasTodaykWh = ((39.5 * 1.03) / 3.6) * $gasToday;       
+        $gasYesterday = MeterReading::whereIn('dataline_id', $gasDataLines)->where('reading_date', $yesterday)->sum('total');
+        $gasYesterdaykWh = ((39.5 * 1.03) / 3.6) * $gasYesterday;      
+        $gasThisMonth = MeterReading::whereIn('dataline_id', $gasDataLines)->whereMonth('reading_date', $month)->sum('total');
+        $gasThisMonthkWh = ((39.5 * 1.03) / 3.6) * $gasThisMonth;        
+        $gasThisYear = MeterReading::whereIn('dataline_id', $gasDataLines)->whereYear('reading_date', $year)->sum('total');
+        $gasThisYearkWh = ((39.5 * 1.03) / 3.6) * $gasThisYear;
+        
+        $stats = new \stdClass();
+        $stats->elec_today = number_format($elecToday,0);
+        $stats->elec_yesterday = number_format($elecYesterday,0);
+        $stats->elec_month = number_format($elecThisMonth,0);
+        $stats->elec_year = number_format($elecThisYear,0);
+        $stats->gas_today = number_format($gasTodaykWh,0);
+        $stats->gas_yesterday = number_format($gasYesterdaykWh,0);
+        $stats->gas_month = number_format($gasThisMonthkWh,0);
+        $stats->gas_year = number_format($gasThisYearkWh,0);
+        $stats->heat_today = number_format($heatTodaykWh,0);
+        $stats->heat_yesterday = number_format($heatYesterdaykWh,0);
+        $stats->heat_month = number_format($heatThisMonthkWh,0);
+        $stats->heat_year = number_format($heatThisYearkWh,0);
+        return $stats;
+
+    }
+
     public static function convertHeatingToKwh($reading, $boilerEfficiency)
     {
         if ($boilerEfficiency > 0):

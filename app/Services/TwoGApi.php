@@ -90,11 +90,10 @@ class TwoGApi
             $api_results[] = $single;
         endforeach;
         if (count($data) > 0):
-            Log::info($install->asset_id . ' has sent readings.');
+            Log::channel('slack')->info($install->asset_id . ' has sent readings.');
             TwoGApi::parse2GReadings($api_results, $date, $install);
         else:
-            Log::info('No Data for this period recorded for ' . $install->asset_id);
-            Log::info('Status Code:'  . $status);
+            Log::info('No Data for this period recorded for ' . $install->asset_id .'. Status='.$status);
             $install->machine_status = 4;
             $install->save();
         endif;

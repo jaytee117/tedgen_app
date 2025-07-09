@@ -13,15 +13,15 @@
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small  stretched-link">Gas Consumed</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->gas_today}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Electricity Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->elec_today}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Heat Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->heat_today}} Kw</div>
                     </div>
                 </div>
             </div>
@@ -36,15 +36,15 @@
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small  stretched-link">Gas Consumed</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->gas_yesterday}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Electricity Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->elec_yesterday}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Heat Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->heat_yesterday}} Kw</div>
                     </div>
                 </div>
             </div>
@@ -61,15 +61,15 @@
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small  stretched-link">Gas Consumed</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->gas_month}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Electricity Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->elec_month}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Heat Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->heat_month}} Kw</div>
                     </div>
                 </div>
             </div>
@@ -86,15 +86,15 @@
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small  stretched-link">Gas Consumed</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->gas_year}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Electricity Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->elec_year}} Kw</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="small stretched-link">Heat Generated</div>
-                        <div class="small "><i class="fas fa-angle-right"></i> 99 Kw</div>
+                        <div class="small "><i class="fas fa-angle-right"></i> {{ $stats->heat_year}} Kw</div>
                     </div>
                 </div>
             </div>

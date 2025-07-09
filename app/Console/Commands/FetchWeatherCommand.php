@@ -56,7 +56,7 @@ class FetchWeatherCommand extends Command
                 $site->weather_icon = $result->weather[0]->icon;
                 $site->save();
             else:
-                Log::error($weather->getStatus() . ' weather API status');
+                Log::channel('slack')->error($weather->getStatus() . ' weather API status');
             endif;
             $count++;
         endforeach;

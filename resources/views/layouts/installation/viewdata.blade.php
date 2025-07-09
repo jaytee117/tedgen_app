@@ -2,6 +2,7 @@
 @section('content')
     <div id="chp-dash">
         <div id="barchart-chp" style="width:99.5%;height:600px"></div>
+        <div id="buttonHolder-chp"></div>
     </div>
     <script type="text/javascript">
         var ChpDash = {
@@ -39,7 +40,9 @@
                                         ChpDash.graphTitle = 'CHP Usage';
                                         ChpDash.graphStack = false;
                                     }
+                                    ChpDash.siteName = "{{$installation->site['site_name']}} - {{$installation->asset_id}}";
                                     ChpDash.loadYearView();
+                                    
                                 },
                                 error: function(response) {
                                     $.each(response.responseJSON.errors, function(key,
@@ -71,7 +74,7 @@
                     gasinput.push(ChpDash.monthly[i][5])
                 }
                 ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
-                //document.querySelector('#barchart-chp').innerHTML = '';
+                document.querySelector('#buttonHolder-chp').innerHTML = '';
             },
 
             getDailys: function() {
@@ -102,7 +105,8 @@
                             gasinput.push(response[i][5]);
                         }
                         ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
-                        ChpDash.active.selectedDate = ChpDash.selectedDate;                        
+                        ChpDash.active.selectedDate = ChpDash.selectedDate;
+                        document.querySelector('#buttonHolder-chp').innerHTML = '<button type="button" class="btn btn-info" onclick="ChpDash.loadYearView();"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>';                                 
                     },
                     error: function(response) {
                         $.each(response.responseJSON.errors, function(key,
@@ -142,6 +146,7 @@
                         }
                         ChpDash.drawBarChart(xaxis, elec, gas, heat, elecinput, gasinput);
                         ChpDash.active.selectedDate = ChpDash.selectedDate;
+                        document.querySelector('#buttonHolder-chp').innerHTML = '<button type="button" class="btn btn-info" onclick="ChpDash.getDailys();"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>';
                     },
                     error: function(response) {
                         $.each(response.responseJSON.errors, function(key,
@@ -158,7 +163,7 @@
                         type: 'line'
                     },
                     title: {
-                        text: 'CHP Usage Graphs'
+                        text: 'Meter Readings for ' + ChpDash.siteName
                     },
                     subtitle: {
                         text: ''

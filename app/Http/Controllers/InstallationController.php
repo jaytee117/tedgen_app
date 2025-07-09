@@ -22,6 +22,7 @@ class InstallationController extends Controller
 
     public function viewdata(Installation $installation)
     {
+        $installation->load('site');
         return view('layouts.installation.viewdata', ['installation' => $installation]);
     }
 
